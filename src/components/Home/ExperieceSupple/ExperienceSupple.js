@@ -4,6 +4,7 @@ import stock2 from "../../../images/stock 2.jpg";
 import stock3 from "../../../images/stock 3.jpg";
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 
 function ExperienceSupple() {
     const [activeSlide, setActiveSlide] = useState(0);
@@ -38,7 +39,7 @@ function ExperienceSupple() {
                     <div className='slider-overlay-content'>
                         <h1>Experience Supple</h1>
                         <p>Premium Hand Made Bath Soaps</p>
-                        <button>Explore Now</button>
+                        <button>Explore Now <ArrowForwardRoundedIcon color="white" fontSize="small" /></button>
                     </div>
                     <div className='slider-overlay-dots'>
                         <div className='slider-overlay-dots-container'>

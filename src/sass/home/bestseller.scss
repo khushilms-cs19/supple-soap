@@ -1,0 +1,101 @@
+.bestseller {
+  &-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    font-family: "Besley", sans-serif;
+    background-image: url("./images/bestsellersbackground.png");
+    h1 {
+      z-index: 5;
+      color: white;
+      margin: 20px 20px 20px 50px;
+    }
+  }
+  &-underline {
+    z-index: 5;
+    width: 35%;
+  }
+  &-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+      to bottom right,
+      rgba(0, 0, 0, 0.7) 5%,
+      rgba(0, 0, 0, 0.4) 20%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.4) 75%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+  }
+  &-grid {
+    z-index: 5;
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    height: 60%;
+    align-items: center;
+    padding: 50px;
+    &-item {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      &-content {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 10px;
+        display: flex;
+        z-index: 6;
+        flex-direction: column;
+        align-items: center;
+        width: 250px;
+        position: absolute;
+        height: 220px;
+        box-sizing: border-box;
+        transition: all 0.5s ease-out;
+        cursor: pointer;
+        button {
+          border: none;
+          width: 9rem;
+          height: 2.5rem;
+          background-color: rgba(255, 255, 255, 0.7);
+          font-size: large;
+          font-family: "Besley", serif;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          &:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+          }
+          //   font-weight: 600;
+        }
+        p {
+          color: white;
+          font-family: "Besley", serif;
+          font-size: small;
+          padding: 10px;
+        }
+      }
+
+      &-image {
+        transition: all 0.5s ease-out;
+        width: 250px;
+        height: 220px;
+        z-index: 7;
+        &:hover {
+          cursor: pointer;
+        }
+        img {
+          width: 250px;
+          height: 220px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}

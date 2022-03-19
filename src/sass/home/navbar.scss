@@ -4,6 +4,7 @@
     cursor: pointer;
   }
   &-container {
+    transition: all 0.5s;
     z-index: 10;
     font-family: "Josefin Sans", sans-serif;
     font-size: larger;
@@ -33,6 +34,7 @@
     justify-content: space-between;
     align-items: center;
     button {
+      transition: all 0.3s;
       font-weight: 700;
       font-family: "Josefin Snas", sans-serif;
       font-size: large;

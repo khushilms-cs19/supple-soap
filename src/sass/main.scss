@@ -1,8 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Besley&display=swap");
+
+//Contants
 @import "./constants.scss";
+
+//Home page
 @import "./home/navbar.scss";
 @import "./home/slider.scss";
+@import "./home/bestseller.scss";
 
 * {
   margin: 0;
