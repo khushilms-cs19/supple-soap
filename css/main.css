@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&display=swap");
+.navbar {
+  position: absolute;
+  width: 100%;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff9f1;
+}
+
+.navbar-pages {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-pages li {
+  list-style-type: none;
+}
+
+.navbar-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-buttons button {
+  width: 7.5rem;
+  height: 2.5rem;
+  margin: 0px 10px;
+  border: none;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.user-img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.user-img-container {
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  border-radius: 50%;
+}

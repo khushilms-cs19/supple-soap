@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Besley&display=swap");
+@import "./constants.scss";
+@import "./home/navbar.scss";
+@import "./home/slider.scss";
+
+* {
+  margin: 0;
+  //   font-family: "Besley", serif;
+}
