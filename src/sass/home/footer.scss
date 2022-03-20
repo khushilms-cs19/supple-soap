@@ -1,0 +1,36 @@
+.home-footer {
+  width: 100%;
+  height: 250px;
+  background-color: $color-primary-footer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  &-title {
+    font-family: "Besley", serif;
+    color: white;
+  }
+  &-icons {
+    width: 20%;
+    display: flex;
+    justify-content: space-around;
+    img {
+      width: 30px;
+    }
+  }
+  &-underline {
+    display: flex;
+    align-items: center;
+    width: 20%;
+    justify-content: space-around;
+    div {
+      width: 110px;
+      height: 5px;
+      background-color: white;
+      border-radius: 5px;
+    }
+  }
+  p {
+    color: white;
+  }
+}
