@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 function SoapDescription(props) {
-    const top = "5px 5px 0px 0px";
-    const bottom = "0px 0px 5px 5px";
+    const [mouseOver, setMouseOver] = useState(false);
+    const top = `10px 10px ${!mouseOver ? 10 : 0}px ${!mouseOver ? 10 : 0}px`;
+    const bottom = `${!mouseOver ? 10 : 0}px ${!mouseOver ? 10 : 0}px 10px 10px`;
     const moveTop = "translateY(-110px)";
     const moveDown = "translateY(110px)";
-    const [mouseOver, setMouseOver] = useState(false);
     return (
         <div className='bestseller-grid-item'>
             {

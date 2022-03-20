@@ -206,7 +206,7 @@
   position: relative;
 }
 .bestseller-grid-item-content {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.4);
   padding: 10px;
   display: flex;
   z-index: 6;
@@ -254,6 +254,39 @@
   width: 250px;
   height: 220px;
   object-fit: cover;
+}
+
+.about-page-container {
+  width: 100%;
+  height: 100vh;
+  background-image: url("./images/aboutbg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+.about-page-card {
+  background-color: white;
+  width: 45%;
+  text-align: center;
+  font-family: "Besley", serif;
+  padding: 20px 60px;
+  margin-left: 10rem;
+  box-sizing: border-box;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.25);
+}
+.about-page-card-title {
+  font-weight: 700;
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+.about-page-card-content {
+  margin: 20px 0px;
+  font-size: 15px;
 }
 
 * {
