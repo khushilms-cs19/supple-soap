@@ -1,5 +1,5 @@
 import React from 'react';
-import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
+
 import pomegrenate from "../../../images/customize/pomegrenate.jpg";
 import banana from "../../../images/customize/banana.jpg";
 import lime from "../../../images/customize/lime.jpg";

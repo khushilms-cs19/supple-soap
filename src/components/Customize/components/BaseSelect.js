@@ -1,7 +1,7 @@
 import React from 'react'
 import sheaButter from "../../../images/customize/sheabutter.jpg";
 import glycerin from "../../../images/customize/glycerin.jpg";
-import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
+
 function BaseSelect(props) {
     return (
         <>
