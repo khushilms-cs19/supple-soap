@@ -1,0 +1,34 @@
+.your-order {
+  &-title {
+    color: white;
+    font-family: "Besley", serif;
+    font-size: 20px;
+    font-weight: 300;
+    padding: 20px 0px;
+    border-bottom: 2px solid white;
+    width: 100%;
+    text-align: center;
+  }
+  &-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  &-item {
+    display: flex;
+    // align-items: center;
+    // justify-content: center;
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+    border-bottom: 2px solid gray;
+    justify-content: space-between;
+    p {
+      font-size: large;
+      font-family: "Besley", serif;
+      color: white;
+    }
+  }
+}

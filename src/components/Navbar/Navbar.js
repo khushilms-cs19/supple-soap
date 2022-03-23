@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import logo from "../../images/logo.png";
 import user from "../../images/user.png";
-function Navbar() {
+function Navbar(props) {
     const [currentMove, setCurrentMove] = useState("up");
     const [prevScrollY, setPrevScrollY] = useState(window.scrollY);
 
@@ -25,11 +26,15 @@ function Navbar() {
         <nav className='navbar-container' style={{ top: currentMove === "down" ? "-90px" : "0" }} >
             <img src={logo} alt="logo" className='navbar-img' />
             <ul className='navbar-pages'>
-                <li>Home</li>
+                <Link to={"/"} style={{ textDecoration: "none" }}>
+                    <li onClick={() => window.scroll({ top: 0, left: 0, behavior: "smooth" })}>Home</li>
+                </Link>
                 <li>Shop</li>
-                <li>Customize</li>
-                <li>About</li>
-                <li>Contact Us</li>
+                <Link to={"/customize"} style={{ textDecoration: "none" }}>
+                    <li>Customize</li>
+                </Link>
+                <li onClick={props.scrollToAbout}>About</li>
+                <li onClick={props.scrollToContact}>Contact Us</li>
             </ul>
             <div className='navbar-buttons'>
                 <button className='navbar-buttons-signin'>Sign in</button>

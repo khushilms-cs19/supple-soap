@@ -27,10 +27,10 @@ const DUMMY_DATA = [
         image: product4,
     },
 ]
-function BestSellers() {
+const BestSellers = (props) => {
 
     return (
-        <div className='bestseller-container'>
+        <div className='bestseller-container' >
             <div className='bestseller-overlay'></div>
             <h1>BEST SELLERS</h1>
             <img src={curlUnderline} alt="underline" className='bestseller-underline' />

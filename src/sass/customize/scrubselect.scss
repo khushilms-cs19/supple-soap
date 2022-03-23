@@ -1,0 +1,32 @@
+.scrub-select {
+  &-content {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 5rem;
+    row-gap: 2rem;
+    margin: 20px 0px;
+    &-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      img {
+        border-radius: 10px;
+        transition: all 0.3s;
+        &:hover {
+          transform: scale(1.1);
+          cursor: pointer;
+        }
+      }
+      p {
+        transition: all 0.3s;
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.1);
+        }
+        color: white;
+        font-family: "Besley", serif;
+        padding: 5px 0px;
+      }
+    }
+  }
+}

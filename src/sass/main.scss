@@ -12,6 +12,14 @@
 @import "./home/contactus.scss";
 @import "./home/footer.scss";
 
+//customize page
+@import "./customize/customize.scss";
+@import "./customize/baseselect.scss";
+@import "./customize/scrubselect.scss";
+@import "./customize/typeselect.scss";
+@import "./customize/fragranceselect.scss";
+@import "./customize/essentialoilselect.scss";
+@import "./customize/yourorder.scss";
 * {
   margin: 0;
   //   font-family: "Besley", serif;

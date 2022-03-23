@@ -2,9 +2,9 @@ import React from 'react'
 import soaps from "../../../images/soaponhand.png";
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 
-function ContactUs() {
+const ContactUs = React.forwardRef((props, ref) => {
     return (
-        <div className='contactus-container'>
+        <div className='contactus-container' ref={ref}>
             <div className='contactus-left'>
                 <form className='contactus-form'>
                     <h1>Contact Us</h1>
@@ -23,6 +23,6 @@ function ContactUs() {
             </div>
         </div>
     )
-}
+})
 
 export default ContactUs;
