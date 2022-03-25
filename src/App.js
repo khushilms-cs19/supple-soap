@@ -9,6 +9,8 @@ import ContactUs from './components/Home/ContactUs/ContactUs';
 import HomeFooter from './components/Home/Footer/Footer';
 import { Route, Routes } from 'react-router-dom';
 import Customize from './components/Customize/Customize';
+import Products from './components/Products/Products';
+import Product from './components/Product.js/Product';
 function App() {
     const scrollToAbout = () => {
         aboutRef.current.scrollIntoView({ behavior: "smooth" });
@@ -31,6 +33,9 @@ function App() {
                     <HomeFooter />
                 </>} />
                 <Route path="customize" element={<Customize />} />
+                <Route path="products" element={<Products />} />
+                <Route path="products/:productId" element={<Product />} />
+                <Route path="*" element={<p>The page does not exist</p>} />
             </Routes>
         </div>
     );

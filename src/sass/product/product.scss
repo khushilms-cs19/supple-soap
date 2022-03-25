@@ -1,0 +1,97 @@
+.product-page {
+  &-container {
+    background-image: url("./images/contactbg.jpg");
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    padding-top: 7rem;
+    box-sizing: border-box;
+  }
+  &-line {
+    width: 5px;
+    height: 400px;
+    background-color: $color-secondary-button;
+    border-radius: 5px;
+    margin-top: 1rem;
+  }
+  &-card {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    width: 80%;
+    min-height: 50%;
+    margin: 0px auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+  }
+  &-image {
+    padding: 0px 20px;
+    width: 45%;
+
+    img {
+      object-fit: cover;
+      border-radius: 5px;
+      width: 100%;
+    }
+  }
+  &-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    // margin-left: 20px;
+    width: 40%;
+    // padding-left: 50px;
+    // border-left: 3px solid $color-secondary-button;
+    &-button {
+      &-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+      width: 12rem;
+      height: 3rem;
+      border: none;
+      background-color: $color-secondary-button;
+      color: white;
+      border-radius: 5px;
+      font-family: "Besley", serif;
+      font-size: larger;
+      transition: all 0.3s;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+    }
+    &-title {
+      //   font-size: larger;
+      font-family: "Besley", serif;
+    }
+    &-content {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+      min-height: 50%;
+      justify-content: space-between;
+      p {
+        width: 70%;
+        font-size: large;
+      }
+      div {
+        display: flex;
+        align-items: center;
+        column-gap: 40px;
+        label {
+          font-size: large;
+        }
+        input {
+          padding: 5px 5px;
+          border-radius: 5px;
+          border: none;
+          width: 50px;
+          height: 30px;
+        }
+      }
+    }
+  }
+}

@@ -28,6 +28,10 @@
       list-style-type: none;
       cursor: pointer;
       color: white;
+      transition: all 0.2s;
+      &:hover {
+        transform: scale(1.2);
+      }
     }
   }
   &-buttons {

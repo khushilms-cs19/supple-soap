@@ -29,7 +29,9 @@ function Navbar(props) {
                 <Link to={"/"} style={{ textDecoration: "none" }}>
                     <li onClick={() => window.scroll({ top: 0, left: 0, behavior: "smooth" })}>Home</li>
                 </Link>
-                <li>Shop</li>
+                <Link to={"/products"} style={{ textDecoration: "none" }}>
+                    <li>Shop</li>
+                </Link>
                 <Link to={"/customize"} style={{ textDecoration: "none" }}>
                     <li>Customize</li>
                 </Link>
