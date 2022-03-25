@@ -35,8 +35,13 @@ function Navbar(props) {
                 <Link to={"/customize"} style={{ textDecoration: "none" }}>
                     <li>Customize</li>
                 </Link>
-                <li onClick={props.scrollToAbout}>About</li>
-                <li onClick={props.scrollToContact}>Contact Us</li>
+                <Link to={"/"} style={{ textDecoration: "none" }}>
+                    <li onClick={props.scrollToAbout}>About</li>
+                </Link>
+                <Link to={"/"} style={{ textDecoration: "none" }}>
+                    <li onClick={props.scrollToContact}>Contact Us</li>
+                </Link>
+
             </ul>
             <div className='navbar-buttons'>
                 <button className='navbar-buttons-signin'>Sign in</button>
