@@ -1,5 +1,6 @@
 .navbar {
   &-img {
+    width: 10rem;
     margin: 0px 30px;
     cursor: pointer;
   }
@@ -57,6 +58,34 @@
       cursor: pointer;
       transform: scale(1.05);
       box-shadow: 0px 7px 18px -3px rgba(0, 0, 0, 0.2);
+    }
+    &-cart {
+      &-container {
+        transition: all 0.3s;
+        position: relative;
+        margin: 0px;
+        padding: 0px;
+        svg {
+          &:hover {
+            cursor: pointer;
+            transform: scale(1.2);
+          }
+        }
+      }
+      &-size {
+        // text-align: center;
+        // vertical-align: center;
+        display: flex;
+        font-size: small;
+        justify-content: center;
+        align-items: center;
+        background-color: red;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        transform: translate(20px, -45px);
+      }
     }
     &-signin {
       background-color: $color-secondary-button;

@@ -27,7 +27,17 @@
 //product
 @import "./product/product.scss";
 @import "./product/otherproducts.scss";
+
+//modals
+@import "./modals/signup.scss";
+@import "./modals/cartmodal.scss";
 * {
   margin: 0;
   //   font-family: "Besley", serif;
+}
+.link {
+  text-decoration: "none";
+}
+body {
+  position: relative;
 }

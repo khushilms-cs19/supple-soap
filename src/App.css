@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Besley&display=swap");
 .navbar-img {
+  width: 10rem;
   margin: 0px 30px;
   cursor: pointer;
 }
@@ -57,6 +58,28 @@
   cursor: pointer;
   transform: scale(1.05);
   box-shadow: 0px 7px 18px -3px rgba(0, 0, 0, 0.2);
+}
+.navbar-buttons-cart-container {
+  transition: all 0.3s;
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+}
+.navbar-buttons-cart-container svg:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+.navbar-buttons-cart-size {
+  display: flex;
+  font-size: small;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  transform: translate(20px, -45px);
 }
 .navbar-buttons-signin {
   background-color: #a79481;
@@ -686,7 +709,6 @@
 
 .products-page-container {
   background-image: url("./images/customizebg.jpg");
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   background-size: cover;
   padding-top: 6rem;
   width: 100%;
@@ -701,16 +723,18 @@
 }
 .products-page-products {
   background-color: rgba(0, 0, 0, 0.7);
-  width: min-content;
+  width: 90%;
   padding: 20px;
   border-radius: 5px;
   margin: 0px auto;
   display: flex;
+  flex-wrap: wrap;
+  height: auto;
 }
 .products-page-products-item {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 15rem;
   align-items: center;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.7);
@@ -771,7 +795,7 @@
   justify-content: space-between;
   padding: 50px;
   width: 80%;
-  min-height: 50%;
+  min-height: 80%;
   margin: 0px auto;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 5px;
@@ -807,6 +831,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-top: 2rem;
 }
 .product-page-description-button:hover {
   cursor: pointer;
@@ -872,6 +897,7 @@
 }
 .other-products-list-item {
   width: 20%;
+  height: 20rem;
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -908,8 +934,179 @@
   border-radius: 20px;
 }
 
+.modal-overlay {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-container {
+  border-radius: 20px;
+  background-color: rgba(255, 249, 241, 0.7);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  font-family: "Besley", serif;
+}
+.signup-title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.signup-title h2 {
+  width: 100%;
+  text-align: center;
+}
+.signup-title div {
+  transition: all 0.3s;
+}
+.signup-title div:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+.signup-form {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.signup-form input::-webkit-outer-spin-button,
+.signup-form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.signup-form input[type=number] {
+  -moz-appearance: textfield;
+}
+.signup-form input,
+.signup-form textarea {
+  font-size: large;
+  width: 100%;
+  height: 1.5rem;
+  border-radius: 5px;
+  border: 2px solid #a79481;
+  padding: 5px;
+  margin-bottom: 1rem;
+}
+.signup-form input:focus,
+.signup-form textarea:focus {
+  outline: none;
+}
+.signup-form label {
+  width: 100%;
+  text-align: left;
+  font-size: 1.2rem;
+}
+.signup-button-container button {
+  transition: all 0.3s;
+  font-weight: 700;
+  font-family: "Josefin Snas", sans-serif;
+  font-size: large;
+  color: white;
+  width: 7.5rem;
+  height: 2.5rem;
+  margin: 0px 20px;
+  border: none;
+  border-radius: 5px;
+}
+.signup-button-container button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  box-shadow: 0px 7px 18px -3px rgba(0, 0, 0, 0.2);
+}
+.signup-error {
+  color: darkred;
+  margin: 10px;
+  font-weight: 600;
+}
+
+.modal-cross-button {
+  font-size: 2rem;
+}
+
+.cart-modal-container {
+  position: absolute;
+  background-color: white;
+  width: 30rem;
+  transform: translate(-90%, 10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 5px;
+  min-height: 10rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.5);
+}
+.cart-modal-title {
+  width: 100%;
+  position: relative;
+  align-items: center;
+  display: flex;
+  border-bottom: 2px solid black;
+}
+.cart-modal-title h3 {
+  width: 100%;
+  text-align: center;
+}
+.cart-modal-title p {
+  cursor: pointer;
+}
+.cart-modal-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+.cart-modal-list-headers {
+  width: 100%;
+  padding: 0px 0px 10px 10px;
+  box-sizing: border-box;
+  font-size: small;
+  display: flex;
+  justify-content: space-between;
+}
+.cart-modal-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+  padding: 0px 10px;
+  font-size: 1rem;
+}
+.cart-modal-item img {
+  width: 5rem;
+  border-radius: 5px;
+}
+.cart-modal-item p {
+  width: 60%;
+}
+.cart-modal-button-checkout {
+  width: 7rem;
+  height: 2.5rem;
+  background-color: #a79481;
+  margin: 20px;
+}
+
 * {
   margin: 0;
+}
+
+.link {
+  text-decoration: "none";
+}
+
+body {
+  position: relative;
 }
 
 /*# sourceMappingURL=App.css.map */

@@ -5,14 +5,29 @@ import product4 from "../../images/product 4.jpg";
 import { ChevronRightRounded } from '@mui/icons-material';
 import { ChevronLeftRounded } from '@mui/icons-material';
 
-function OtherProducts() {
+const OtherProductItem = (props) => {
+    return (
+        <div className='other-products-list-item'>
+            <img src={props.image} alt="product2" />
+            <p>{props.name}</p>
+            <button>View more<ChevronRightRounded fontSize='medium' color='black' /></button>
+        </div>
+    )
+}
+
+function OtherProducts(props) {
     return (
         <div className='other-products-container'>
             <h2 className='other-products-title'>Other products you may like...</h2>
             <div className='other-products-list'>
                 <ChevronLeftRounded fontSize='large' color="black" />
                 <div className='other-products-list'>
-                    <div className='other-products-list-item'>
+                    {
+                        props.products.map((product) => {
+                            return <OtherProductItem key={product._id} productId={product._id} name={product.name} image={product.image} />
+                        })
+                    }
+                    {/* <div className='other-products-list-item'>
                         <img src={product2} alt="product2" />
                         <p>Supple soap product</p>
                         <button>View more<ChevronRightRounded fontSize='medium' color='black' /></button>
@@ -26,7 +41,7 @@ function OtherProducts() {
                         <img src={product4} alt="product4" />
                         <p>Supple soap product</p>
                         <button>View more <ChevronRightRounded fontSize='medium' color='black' /></button>
-                    </div>
+                    </div> */}
                 </div>
                 <ChevronRightRounded fontSize='large' color="black" />
             </div>

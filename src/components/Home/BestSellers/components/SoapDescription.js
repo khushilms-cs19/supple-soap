@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Link } from 'react-router-dom';
 
 function SoapDescription(props) {
     const [mouseOver, setMouseOver] = useState(false);
@@ -15,11 +16,13 @@ function SoapDescription(props) {
                     <div className='bestseller-grid-item-content' style={{ borderRadius: top, transform: mouseOver ? moveTop : "" }} onMouseEnter={() => {
                         setMouseOver(true);
                     }} onMouseLeave={() => setMouseOver(false)}>
-                        <button>
-                            Shop Now
-                            <ArrowForwardIosIcon color="black" fontSize="small" />
-                        </button>
-                        <p>{props.item.description}</p>
+                        <Link to={`/products/${props.productId}`} style={{ textDecoration: "none" }}>
+                            <button>
+                                Shop Now
+                                <ArrowForwardIosIcon color="black" fontSize="small" />
+                            </button>
+                        </Link>
+                        <p>{(props.item.description.split(" ").slice(0, 32)).join(" ")} . . .</p>
                     </div>
                     <div className='bestseller-grid-item-image' style={{ borderRadius: bottom, transform: mouseOver ? moveDown : "" }} onMouseEnter={() => {
                         setMouseOver(true);
@@ -39,11 +42,13 @@ function SoapDescription(props) {
                     <div className='bestseller-grid-item-content' style={{ borderRadius: bottom, transform: mouseOver ? moveDown : "" }} onMouseEnter={() => {
                         setMouseOver(true);
                     }} onMouseLeave={() => setMouseOver(false)}>
-                        <button>
-                            Shop Now
-                            <ArrowForwardIosIcon color="black" fontSize="small" />
-                        </button>
-                        <p>{props.item.description}</p>
+                        <Link to={`/products/${props.productId}`} style={{ textDecoration: "none" }}>
+                            <button>
+                                Shop Now
+                                <ArrowForwardIosIcon color="black" fontSize="small" />
+                            </button>
+                        </Link>
+                        <p>{(props.item.description.split(" ").slice(0, 32)).join(" ")} . . .</p>
                     </div>
                 </React.Fragment>
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import curlUnderline from "../../../images/curl_underline.png";
 import product1 from "../../../images/product 1.jpg";
 import product2 from "../../../images/product 2.jpg";
@@ -28,7 +29,7 @@ const DUMMY_DATA = [
     },
 ]
 const BestSellers = (props) => {
-
+    const products = useSelector((state) => state.products.products);
     return (
         <div className='bestseller-container' >
             <div className='bestseller-overlay'></div>
@@ -36,11 +37,11 @@ const BestSellers = (props) => {
             <img src={curlUnderline} alt="underline" className='bestseller-underline' />
             <div className='bestseller-grid'>
                 {
-                    DUMMY_DATA.map((item, index) => {
+                    products.map((item, index) => {
                         if (index % 2 === 0) {
-                            return <SoapDescription item={item} key={item.id} imgDirection={"down"} />
+                            return <SoapDescription item={item} key={item._id} imgDirection={"down"} productId={item._id} />
                         } else {
-                            return <SoapDescription item={item} key={item.id} imgDirection={"up"} />
+                            return <SoapDescription item={item} key={item._id} imgDirection={"up"} productId={item._id} />
                         }
                     })
                 }

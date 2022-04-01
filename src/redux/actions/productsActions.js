@@ -1,0 +1,4 @@
+export const productsConstants = {
+    PRODUCTS_UPDATE_DATA: "PRODUCTS_UPDATE_DATA",
+    UPDATE_ONE_PRODUCT_DATA: "UPDATE_ONE_PRODUCT_DATA",
+}
