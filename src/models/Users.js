@@ -30,7 +30,10 @@ const UsersSchema = new mongoose.Schema({
     cart: {
         type: Object,
         required: false,
-        default: [],
+        default: {
+            regularProducts: [],
+            customizedProducts: [],
+        },
     }
 });
 

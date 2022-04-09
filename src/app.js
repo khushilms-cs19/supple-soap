@@ -12,12 +12,26 @@ import { ContactUsRoutes } from "./routes/contactus.js";
 // require("./db/connection")
 const app = express();
 const PORT = process.env.PORT || 5000;
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 app.use(cors({
     origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: [
+        "GET",
+        "POST",
+    ],
+    allowedHeaders: [
+        "Content-Type",
+        "Authentication",
+    ],
 }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 app.get("/", (req, res) => {
     res.send({ status: "good" });
 });

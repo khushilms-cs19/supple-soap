@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const OrdersSchema = new mongoose.Schema({
-    productId: {
+    productIds: {
         type: mongoose.Schema.Types.Array,
         required: true,
         ref: "products",

@@ -3,12 +3,15 @@ import { products } from "../models/Products.js";
 const router = Router();
 
 router.get("/products", async (req, res) => {
-    const productsAll = await products.find();
-    res.send({
-        status: "good",
-        products: productsAll,
-    })
-    console.log(productsAll);
+    try {
+        const productsAll = await products.find();
+        return res.send(productsAll)
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send({
+            error: "There is an error. Try again after some time."
+        })
+    }
 });
 router.post("/products", async (req, res) => {
     const productData = {
