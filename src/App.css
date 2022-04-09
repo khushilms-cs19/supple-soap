@@ -495,7 +495,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  width: 7rem;
+  width: 9rem;
   height: 2.5rem;
   font-size: large;
   transition: all 0.3s;
@@ -509,7 +509,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  width: 7rem;
+  width: 9rem;
   height: 2.5rem;
   font-size: large;
   transition: all 0.3s;
@@ -520,6 +520,11 @@
 .customize-card-button-back {
   border: none;
   background-color: rgba(255, 255, 255, 0.7);
+}
+
+.active-customize-element {
+  border: 5px solid white;
+  border-radius: 10px;
 }
 
 .base-select-content {
@@ -681,7 +686,7 @@
   font-family: "Besley", serif;
   font-size: 20px;
   font-weight: 300;
-  padding: 20px 0px;
+  padding: 10px 0px;
   border-bottom: 2px solid white;
   width: 100%;
   text-align: center;
@@ -705,6 +710,24 @@
   font-size: large;
   font-family: "Besley", serif;
   color: white;
+}
+.your-order-quantity {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 30%;
+  margin: 10px 0px;
+}
+.your-order-quantity p {
+  color: white;
+  font-size: large;
+}
+.your-order-quantity input {
+  width: 2.5rem;
+  height: 2rem;
+  border-radius: 5px;
+  text-align: center;
+  font-size: large;
 }
 
 .products-page-container {
@@ -1035,10 +1058,8 @@
 }
 
 .cart-modal-container {
-  position: absolute;
   background-color: white;
   width: 30rem;
-  transform: translate(-90%, 10px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1065,7 +1086,9 @@
 .cart-modal-list {
   display: flex;
   flex-direction: column;
+  align-items: center;
   row-gap: 20px;
+  margin: 20px 0px;
 }
 .cart-modal-list-headers {
   width: 100%;
@@ -1079,6 +1102,7 @@
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   column-gap: 20px;
   padding: 0px 10px;
   font-size: 1rem;
@@ -1091,10 +1115,115 @@
   width: 60%;
 }
 .cart-modal-button-checkout {
+  transition: all 0.3s;
+  font-weight: 700;
+  font-family: "Josefin Snas", sans-serif;
+  font-size: large;
+  color: white;
+  width: 7.5rem;
+  height: 2.5rem;
+  margin: 0px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #a79481;
+}
+.cart-modal-button-checkout:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  box-shadow: 0px 7px 18px -3px rgba(0, 0, 0, 0.2);
+}
+
+.cart-modal-absolute {
+  transform: translate(-90%, 10px);
+  position: absolute;
+}
+
+.cart-main-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 7rem;
+  background-image: linear-gradient(to bottom, rgba(179, 148, 12, 0.5), rgba(0, 0, 0, 0));
+}
+
+.user-profile-container {
+  padding-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px auto;
+  width: 100%;
+  background-color: rgba(179, 148, 12, 0.2);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+.user-profile-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.user-profile-top img {
+  width: 100px;
+  padding: 20px;
+}
+.user-profile-top p {
+  font-size: x-large;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+.user-profile-tab-selector {
+  display: flex;
+  width: 40%;
+  justify-content: space-around;
+  padding: 1rem;
+  border-bottom: 2px solid #554e45;
+}
+.user-profile-tab-selector button {
   width: 7rem;
   height: 2.5rem;
+  border: none;
+  border-radius: 10px;
+  font-size: large;
+  transition: all 0.3s;
+}
+.user-profile-tab-selector button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+.user-profile-tab-active {
+  width: 40%;
+  padding: 20px;
+}
+
+.tab-active {
   background-color: #a79481;
-  margin: 20px;
+}
+
+.profile-tab {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.profile-tab input {
+  border-radius: 5px;
+  border: none;
+  height: 1.5rem;
+  margin: 10px 0px;
+  font-size: 1.2rem;
+  padding: 5px 10px;
+}
+.profile-tab textarea {
+  margin: 10px 0px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  height: 5rem;
+  border: none;
+  font-size: 1.2rem;
+}
+.profile-tab label {
+  padding: 0px 10px;
+  font-size: 1.2rem;
 }
 
 * {

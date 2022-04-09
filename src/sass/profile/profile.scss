@@ -1,0 +1,54 @@
+.user-profile {
+  &-container {
+    padding-top: 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px auto;
+    width: 100%;
+    background-color: rgba(179, 148, 12, 0.2);
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+  &-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      width: 100px;
+      padding: 20px;
+    }
+    p {
+      font-size: x-large;
+      font-weight: 600;
+      padding-bottom: 10px;
+    }
+  }
+  &-tab-selector {
+    display: flex;
+    width: 40%;
+    justify-content: space-around;
+    padding: 1rem;
+    border-bottom: 2px solid $color-primary-button;
+    button {
+      width: 7rem;
+      height: 2.5rem;
+      border: none;
+      border-radius: 10px;
+      font-size: large;
+      transition: all 0.3s;
+      &:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+      }
+    }
+  }
+  &-tab-active {
+    width: 40%;
+    padding: 20px;
+  }
+}
+
+.tab-active {
+  background-color: $color-primary-footer;
+}

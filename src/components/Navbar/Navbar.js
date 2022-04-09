@@ -13,6 +13,7 @@ function Navbar(props) {
     const [showCart, setShowCart] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const location = useLocation();
     // const history = useHistory();
     const logoutUser = () => {
         localStorage.clear();
@@ -50,9 +51,14 @@ function Navbar(props) {
                 <Link to={"/products"} style={{ textDecoration: "none" }}>
                     <li>Shop</li>
                 </Link>
-                <Link to={"/customize"} style={{ textDecoration: "none" }}>
-                    <li>Customize</li>
-                </Link>
+                {
+                    userData.isAuthenticated ?
+                        <Link to={"/customize"} style={{ textDecoration: "none" }}>
+                            <li>Customize</li>
+                        </Link>
+                        :
+                        <li onClick={props.openSignupModal}>Customize</li>
+                }
                 <Link to={"/"} style={{ textDecoration: "none" }}>
                     <li onClick={props.scrollToAbout}>About</li>
                 </Link>
@@ -67,11 +73,16 @@ function Navbar(props) {
                         <>
                             <button className='navbar-buttons-login' onClick={logoutUser}>Logout</button>
                             <div className='navbar-buttons-cart-container' >
-                                <ShoppingCartIcon fontSize='large' color="#554e45" onClick={() => setShowCart((prevState) => !prevState)} />
-                                <p className='navbar-buttons-cart-size'>{userData.cart.length}</p>
+                                <ShoppingCartIcon fontSize='large' color="#554e45" onClick={() => setShowCart((prevState) => {
+                                    if (location.pathname !== "/user/checkout")
+                                        return !prevState;
+                                    else
+                                        return prevState;
+                                })} />
+                                <p className='navbar-buttons-cart-size'>{userData.cart.regularProducts.length + userData.cart.customizedProducts.length}</p>
                                 {
-                                    showCart &&
-                                    <CartDetails closeCartModal={closeCartModal} />
+                                    showCart && location.pathname !== "/user/checkout" &&
+                                    < CartDetails closeCartModal={closeCartModal} mainPage={false} />
                                 }
                             </div>
                         </>

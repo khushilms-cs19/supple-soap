@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { userConstants } from '../../redux/actions/userActions';
 
 function SignupModal(props) {
@@ -12,16 +13,20 @@ function SignupModal(props) {
     const confirmpasswordRef = useRef(null);
     const [error, setError] = useState("");
     const dispatch = useDispatch();
-    const clearError = () => {
+    const setclearError = (error) => {
+        setError(error);
         setTimeout(() => {
             setError("");
         }, 3000);
     }
+    const openLoginModal = () => {
+        props.closeModal();
+        props.openLoginModal();
+    }
     const clickHandler = async (event) => {
         event.preventDefault();
         if (passwordRef.current.value !== confirmpasswordRef.current.value) {
-            setError("passwords dont match");
-            clearError();
+            setclearError("passwords dont match");
             return false;
         }
         const signupData = {
@@ -50,8 +55,7 @@ function SignupModal(props) {
                 props.closeModal();
             }).catch((error) => {
                 if (error.response.status === 409) {
-                    setError("User already exists");
-                    clearError();
+                    setclearError("User already exists");
                 }
             })
             console.log({
@@ -62,8 +66,7 @@ function SignupModal(props) {
                 password: passwordRef.current.value,
             });
         } else {
-            setError("Enter all the fields");
-            clearError();
+            setclearError("Enter all the fields");
         }
     }
     return (
@@ -92,6 +95,9 @@ function SignupModal(props) {
                         error &&
                         <p className='signup-error'>*{error}</p>
                     }
+                </div>
+                <div onClick={openLoginModal} style={{ margin: "10px 0px" }}>
+                    <p>Already have an account? <span style={{ textDecoration: "underline", cursor: "pointer" }}>Click here!</span></p>
                 </div>
                 <div className='signup-button-container'>
                     <button className='navbar-buttons-signin' type='submit'>Sign up</button>

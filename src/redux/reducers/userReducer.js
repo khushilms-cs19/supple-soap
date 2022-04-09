@@ -6,7 +6,10 @@ const initialState = {
     address: "",
     phoneno: "",
     token: "",
-    cart: [],
+    cart: {
+        regularProducts: [],
+        customizedProducts: [],
+    },
     orders: [],
     isAuthenticated: false,
 }
@@ -36,6 +39,22 @@ const userReducer = (state = initialState, action) => {
         case userConstants.USER_CLEAR_DATA:
             return {
                 ...initialState,
+            }
+        case userConstants.USER_CLEAR_CUSTOMIZED_PRODUCTS:
+            return {
+                ...state,
+                cart: {
+                    regularProducts: state.cart.regularProducts,
+                    customizedProducts: initialState.cart.customizedProducts,
+                }
+            }
+        case userConstants.USER_CLEAR_REGULAR_PRODUCTS:
+            return {
+                ...state,
+                cart: {
+                    regularProducts: initialState.cart.customizedProducts,
+                    customizedProducts: state.cart.customizedProducts,
+                }
             }
         default: return state;
     }

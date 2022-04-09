@@ -22,7 +22,7 @@ function Product(props) {
             props.openSignupModal();
             return;
         }
-        const cartData = [...userData.cart];
+        const cartData = [...userData.cart.regularProducts];
         const selectedItemInCart = cartData.findIndex((item) => {
             return item.productId === selectedProduct._id;
         });
@@ -38,7 +38,10 @@ function Product(props) {
         axios({
             method: "PUT",
             baseURL: "http://localhost:5000/user/cart/update",
-            data: cartData,
+            data: {
+                ...userData.cart,
+                regularProducts: cartData,
+            },
             headers: {
                 "Authentication": localStorage.getItem("user"),
             }

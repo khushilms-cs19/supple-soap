@@ -4,13 +4,18 @@ import product3 from "../../images/product 3.jpg";
 import product4 from "../../images/product 4.jpg";
 import { ChevronRightRounded } from '@mui/icons-material';
 import { ChevronLeftRounded } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const OtherProductItem = (props) => {
+    const navigate = useNavigate();
+    const goToSoapMainPage = () => {
+        navigate(`/products/${props.link}`);
+    }
     return (
         <div className='other-products-list-item'>
             <img src={props.image} alt="product2" />
             <p>{props.name}</p>
-            <button>View more<ChevronRightRounded fontSize='medium' color='black' /></button>
+            <button onClick={goToSoapMainPage}>View more<ChevronRightRounded fontSize='medium' color='black' /></button>
         </div>
     )
 }
@@ -24,24 +29,9 @@ function OtherProducts(props) {
                 <div className='other-products-list'>
                     {
                         props.products.map((product) => {
-                            return <OtherProductItem key={product._id} productId={product._id} name={product.name} image={product.image} />
+                            return <OtherProductItem key={product._id} productId={product._id} name={product.name} image={product.image} link={product._id} />
                         })
                     }
-                    {/* <div className='other-products-list-item'>
-                        <img src={product2} alt="product2" />
-                        <p>Supple soap product</p>
-                        <button>View more<ChevronRightRounded fontSize='medium' color='black' /></button>
-                    </div>
-                    <div className='other-products-list-item'>
-                        <img src={product3} alt="product3" />
-                        <p>Supple soap product</p>
-                        <button>View more <ChevronRightRounded fontSize='medium' color='black' /></button>
-                    </div>
-                    <div className='other-products-list-item'>
-                        <img src={product4} alt="product4" />
-                        <p>Supple soap product</p>
-                        <button>View more <ChevronRightRounded fontSize='medium' color='black' /></button>
-                    </div> */}
                 </div>
                 <ChevronRightRounded fontSize='large' color="black" />
             </div>

@@ -14,6 +14,10 @@ function LoginModal(props) {
             setError("");
         }, 3000);
     }
+    const openSignupModal = () => {
+        props.closeModal();
+        props.openSignupModal();
+    }
     const clickHandler = (event) => {
         event.preventDefault();
         if (emailRef.current.value && passwordRef.current.value) {
@@ -64,6 +68,9 @@ function LoginModal(props) {
                         error &&
                         <p className='signup-error'>*{error}</p>
                     }
+                </div>
+                <div onClick={openSignupModal} style={{ margin: "10px 0px" }}>
+                    <p>Don't have an account <span style={{ textDecoration: "underline", cursor: "pointer" }}>Click here to Sign up!</span></p>
                 </div>
                 <div className='signup-button-container'>
                     <button className='navbar-buttons-signin' type='submit'>Login</button>

@@ -53,7 +53,7 @@
         display: flex;
         align-items: center;
         justify-content: space-evenly;
-        width: 7rem;
+        width: 9rem;
         height: 2.5rem;
         font-size: large;
         transition: all 0.3s;
@@ -68,7 +68,7 @@
       display: flex;
       align-items: center;
       justify-content: space-evenly;
-      width: 7rem;
+      width: 9rem;
       height: 2.5rem;
       font-size: large;
       transition: all 0.3s;
@@ -82,4 +82,10 @@
     }
     // opacity: 0.7;
   }
+}
+
+.active-customize-element {
+  border: 5px solid white;
+  border-radius: 10px;
+  //   transform: scale(1.1);
 }

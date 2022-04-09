@@ -1,6 +1,6 @@
 import { customizedOrderActions } from "../actions/customizedOrderAction";
 const initialState = {
-    base: "shea button",
+    base: "shea butter",
     scrub: "coffee",
     type: "banana",
     fragrance: "aqua marine",
@@ -44,7 +44,10 @@ const customizedOrderReducer = (state = initialState, action) => {
                 ...state,
                 quantity: action.payload,
             }
-
+        case customizedOrderActions.CLEAR_CART_DATA:
+            return {
+                ...initialState,
+            }
         default: return state;
     }
 }

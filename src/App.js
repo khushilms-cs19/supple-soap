@@ -17,6 +17,9 @@ import { productsConstants } from './redux/actions/productsActions';
 import { userConstants } from './redux/actions/userActions';
 import SignupModal from './components/Modals/SignupModal';
 import LoginModal from './components/Modals/LoginModal';
+import Checkout from './components/Checkout/Checkout';
+import ProtectedRoute from './ProtectedRoute';
+import Profile from './components/Profile/Profile';
 function App() {
     const dispatch = useDispatch();
     const [showSignupModal, setShowSignupModal] = useState(false);
@@ -84,13 +87,13 @@ function App() {
             {
                 showSignupModal &&
                 <div className='modal-overlay'>
-                    <SignupModal closeModal={closeModal} />
+                    <SignupModal closeModal={closeModal} openLoginModal={openLoginModal} />
                 </div>
             }
             {
                 showLoginModal &&
                 <div className='modal-overlay'>
-                    <LoginModal closeModal={closeModal} />
+                    <LoginModal closeModal={closeModal} openSignupModal={openSignupModal} />
                 </div>
             }
             <Routes>
@@ -101,9 +104,15 @@ function App() {
                     <ContactUs ref={contactUsRef} />
                     <HomeFooter />
                 </>} />
-                <Route path="customize" element={<Customize />} />
+                <Route path="customize" element={
+                    <ProtectedRoute>
+                        <Customize />
+                    </ProtectedRoute>
+                } />
                 <Route path="products" element={<Products />} />
                 <Route path="products/:productId" element={<Product openSignupModal={openSignupModal} />} />
+                <Route path="/user/checkout" element={<Checkout />} />
+                <Route path="/user/profile" element={<Profile />} />
                 <Route path="*" element={<p>The page does not exist</p>} />
             </Routes>
         </div>
