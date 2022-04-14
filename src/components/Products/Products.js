@@ -1,11 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import product1 from "../../images/product 1.jpg";
-import product2 from "../../images/product 2.jpg";
-import product3 from "../../images/product 3.jpg";
-import product4 from "../../images/product 4.jpg";
-import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
+// import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 const ProductsItem = (props) => {
     return (
         <div className='products-page-products-item'>
@@ -14,7 +10,7 @@ const ProductsItem = (props) => {
             <div>
                 <Link to={`/products/${props.productId}`} style={{ textDecoration: "none" }} >
                     <button>View More
-                        <ChevronRightRoundedIcon color="black" fontSize="medium" />
+                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/right.png" style={{ width: "20px", height: "20px" }} />
                     </button>
                 </Link>
             </div>

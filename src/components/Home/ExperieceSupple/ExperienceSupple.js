@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import stock1 from "../../../images/stock 1.jpg";
 import stock2 from "../../../images/stock 2.jpg";
 import stock3 from "../../../images/stock 3.jpg";
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
-import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
-import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
+// import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+// import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+// import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 
 function ExperienceSupple() {
     const [activeSlide, setActiveSlide] = useState(0);
@@ -33,13 +33,14 @@ function ExperienceSupple() {
             <div className='slider-container'>
                 <div className='slider-overlay'>
                     <div className='slider-overlay-arrows'>
-                        <ArrowBackIosNewRoundedIcon color='white' fontSize='large' onClick={goPrev} />
-                        <ArrowForwardIosRoundedIcon color="white" fontSize='large' onClick={goNext} />
+                        <img src="https://img.icons8.com/ios-filled/50/000000/back.png" onClick={goPrev} />
+
+                        <img src="https://img.icons8.com/ios-filled/50/000000/forward--v1.png" onClick={goNext} />
                     </div>
                     <div className='slider-overlay-content'>
                         <h1>Experience Supple</h1>
                         <p>Premium Hand Made Bath Soaps</p>
-                        <button>Explore Now <ArrowForwardRoundedIcon color="white" fontSize="small" /></button>
+                        <button>Explore Now <img src="https://img.icons8.com/ios-filled/50/ffffff/forward--v1.png" style={{ width: "20px" }} /></button>
                     </div>
                     <div className='slider-overlay-dots'>
                         <div className='slider-overlay-dots-container'>

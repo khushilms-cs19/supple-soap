@@ -18,7 +18,7 @@ function TypeSelect() {
         });
     }
     return (
-        <>
+        <React.Fragment>
             <h4 className='customize-card-title'>Select your Type</h4>
             <div className='type-select-content' onClick={selectItem}>
                 <div className='type-select-content-item' data-type="pomegranate & rose">
@@ -46,7 +46,7 @@ function TypeSelect() {
                     <p data-type="whey">Whey</p>
                 </div>
             </div>
-        </>
+        </React.Fragment>
     )
 }
 

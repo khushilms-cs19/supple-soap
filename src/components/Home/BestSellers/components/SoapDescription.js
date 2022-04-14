@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Link } from 'react-router-dom';
 
 function SoapDescription(props) {
@@ -19,7 +19,7 @@ function SoapDescription(props) {
                         <Link to={`/products/${props.productId}`} style={{ textDecoration: "none" }}>
                             <button>
                                 Shop Now
-                                <ArrowForwardIosIcon color="black" fontSize="small" />
+                                <img src="https://img.icons8.com/ios-filled/50/000000/forward--v1.png" style={{ width: "20px" }} />
                             </button>
                         </Link>
                         <p>{(props.item.description.split(" ").slice(0, 32)).join(" ")} . . .</p>
@@ -45,7 +45,7 @@ function SoapDescription(props) {
                         <Link to={`/products/${props.productId}`} style={{ textDecoration: "none" }}>
                             <button>
                                 Shop Now
-                                <ArrowForwardIosIcon color="black" fontSize="small" />
+                                <img src="https://img.icons8.com/ios-filled/50/000000/forward--v1.png" style={{ width: "20px" }} />
                             </button>
                         </Link>
                         <p>{(props.item.description.split(" ").slice(0, 32)).join(" ")} . . .</p>

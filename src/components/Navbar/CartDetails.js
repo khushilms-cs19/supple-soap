@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import DeleteIcon from '@mui/icons-material/Delete';
+// import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import { userConstants } from '../../redux/actions/userActions';
 import soap from "../../images/soap.png";
@@ -213,14 +213,15 @@ function CartDetails(props) {
                                     <p>{item.productData.name}</p>
                                     <span>{`x${item.quantity}`}</span>
 
-                                    <DeleteIcon fontSize='medium' onClick={() => removeFromCartRegular(item.productId)} />
+                                    {/* <DeleteIcon fontSize='medium' onClick={() => removeFromCartRegular(item.productId)} /> */}
+                                    <img src="https://img.icons8.com/ios-glyphs/30/000000/filled-trash.png" onClick={() => removeFromCartRegular(item.productId)} style={{ width: "30px" }} />
                                 </div>
                             )
                         })
                 }
                 {
                     userData.cart.customizedProducts.length !== 0 &&
-                    <>
+                    <React.Fragment>
                         <h4 style={{ borderBottom: "2px solid black" }}>Customized Products</h4>
                         {
                             userData.cart.customizedProducts.length === 0 ?
@@ -231,12 +232,13 @@ function CartDetails(props) {
                                             <img src={soap} alt="soap" />
                                             <p>{capitalizeName(item.base)}, {capitalizeName(item.scrub)}, {capitalizeName(item.type)}, {capitalizeName(item.fragrance)}, {capitalizeName(item.essentialOil)}</p>
                                             <span>{`x${item.quantity}`}</span>
-                                            <DeleteIcon fontSize='medium' onClick={() => removeFromCartCustomized(index)} />
+                                            {/* <DeleteIcon fontSize='medium' onClick={() => removeFromCartCustomized(index)} /> */}
+                                            <img src="https://img.icons8.com/ios-glyphs/30/000000/filled-trash.png" onClick={() => removeFromCartCustomized(index)} style={{ width: "30px" }} />
                                         </div>
                                     )
                                 })
                         }
-                    </>
+                    </React.Fragment>
                 }
             </div>
             {

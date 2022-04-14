@@ -1,6 +1,6 @@
 import React from 'react'
 import soaps from "../../../images/soaponhand.png";
-import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+// import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 
 const ContactUs = React.forwardRef((props, ref) => {
     return (
@@ -14,7 +14,7 @@ const ContactUs = React.forwardRef((props, ref) => {
                     <textarea placeholder='Type your message here...' />
                     <button>
                         Submit
-                        <ArrowForwardIosRoundedIcon color="white" fontSize='small' />
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/forward--v1.png" style={{ width: "20px" }} />
                     </button>
                 </form>
             </div>

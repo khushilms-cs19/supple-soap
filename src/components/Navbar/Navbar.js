@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logonew from "../../images/logonew.svg";
 import user from "../../images/user.png";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { userConstants } from '../../redux/actions/userActions';
 import CartDetails from './CartDetails';
 function Navbar(props) {
@@ -67,10 +67,16 @@ function Navbar(props) {
             <div className='navbar-buttons'>
                 {
                     userData.isAuthenticated ?
-                        <>
+                        <React.Fragment>
                             <button className='navbar-buttons-login' onClick={logoutUser}>Logout</button>
                             <div className='navbar-buttons-cart-container' >
-                                <ShoppingCartIcon fontSize='large' color="#554e45" onClick={() => props.setShowCart((prevState) => {
+                                {/* <ShoppingCartIcon fontSize='large' color="#554e45" onClick={() => props.setShowCart((prevState) => {
+                                    if (location.pathname !== "/user/checkout")
+                                        return !prevState;
+                                    else
+                                        return prevState;
+                                })} /> */}
+                                <img src="https://img.icons8.com/material-two-tone/24/000000/shopping-cart-loaded.png" onClick={() => props.setShowCart((prevState) => {
                                     if (location.pathname !== "/user/checkout")
                                         return !prevState;
                                     else
@@ -82,12 +88,12 @@ function Navbar(props) {
                                     < CartDetails closeCartModal={closeCartModal} mainPage={false} />
                                 }
                             </div>
-                        </>
+                        </React.Fragment>
                         :
-                        <>
+                        <React.Fragment>
                             <button className='navbar-buttons-signin' onClick={props.openSignupModal}>Sign up</button>
                             <button onClick={props.openLoginModal} className='navbar-buttons-login'>Log in</button>
-                        </>
+                        </React.Fragment>
                 }
                 {
                     userData.isAuthenticated ?

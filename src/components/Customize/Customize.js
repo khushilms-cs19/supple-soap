@@ -7,7 +7,7 @@ import EssentialOilSelect from './components/EssentialOilSelect';
 import FragranceSelect from './components/FragranceSelect';
 import ScrubSelect from './components/ScrubSelect';
 import TypeSelect from './components/TypeSelect';
-import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
+// import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import YourSelection from './components/YourSelection';
 import { customizedOrderActions } from '../../redux/actions/customizedOrderAction';
 import { useNavigate } from 'react-router-dom';
@@ -116,7 +116,8 @@ function Customize() {
                             !(activeSlide === 5) &&
                             <button className="customize-card-button-next" onClick={goToNextSlide}>
                                 Next
-                                <ArrowForwardRoundedIcon fontSize='small' color="white" />
+                                {/* <ArrowForwardRoundedIcon fontSize='small' color="white" /> */}
+                                <img src="https://img.icons8.com/ios-filled/50/ffffff/forward--v1.png" style={{ width: "20px" }} />
                             </button>
                         }
                         {

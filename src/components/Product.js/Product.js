@@ -59,7 +59,7 @@ function Product(props) {
         // console.log(userData);
     }
     return (
-        <>
+        <React.Fragment>
             <div className='product-page-container'>
                 <div className='product-page-card'>
                     <div className='product-page-image'>
@@ -86,7 +86,7 @@ function Product(props) {
                 </div>
                 <OtherProducts products={others} />
             </div >
-        </>
+        </React.Fragment>
     )
 }
 

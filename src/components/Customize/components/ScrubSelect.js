@@ -19,7 +19,7 @@ function ScrubSelect() {
         });
     }
     return (
-        <>
+        <React.Fragment>
             <h4 className='customize-card-title'>Select your Scrub</h4>
             <div className='scrub-select-content' onClick={selectItem}>
                 <div className='scrub-select-content-item' data-scrub="coffee">
@@ -47,7 +47,7 @@ function ScrubSelect() {
                     <p data-scrub="charcoal">Charcoal</p>
                 </div>
             </div>
-        </>
+        </React.Fragment>
     )
 }
 

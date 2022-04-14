@@ -17,7 +17,7 @@ function YourSelection() {
         });
     }
     return (
-        <>
+        <React.Fragment>
             <h4 className='your-order-title'>Your Order</h4>
             <div className='your-order-content'>
                 <div className='your-order-item'>
@@ -46,7 +46,7 @@ function YourSelection() {
                     <input name="quantity" type={"number"} max={10} min={1} defaultValue={1} onChange={changeQuantity} />
                 </div>
             </div>
-        </>
+        </React.Fragment>
     )
 }
 

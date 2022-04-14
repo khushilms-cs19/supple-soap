@@ -18,7 +18,7 @@ function FragranceSelect() {
         });
     }
     return (
-        <>
+        <React.Fragment>
             <h4 className='customize-card-title'>Select your Fragrance</h4>
             <div className='fragrance-select-content' onClick={selectItem}>
                 <div className='fragrance-select-content-item' data-fragrance="aqua marine">
@@ -44,7 +44,7 @@ function FragranceSelect() {
                     <p data-fragrance="woody">Woody</p>
                 </div>
             </div>
-        </>
+        </React.Fragment>
     )
 }
 

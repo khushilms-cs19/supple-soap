@@ -114,7 +114,7 @@ function App() {
             }
             {
                 showMessageModal &&
-                <>
+                <React.Fragment>
                     <div className='modal-overlay'>
                         <div className='main-modal-container'>
                             <div className='main-modal-top'>
@@ -123,16 +123,16 @@ function App() {
                             <p className='main-modal-message'>{messageFromServer}</p>
                         </div>
                     </div>
-                </>
+                </React.Fragment>
             }
             <Routes>
-                <Route path='/' element={<>
+                <Route path='/' element={<React.Fragment>
                     <ExperienceSupple />
                     <BestSellers />
                     <About ref={aboutRef} />
                     <ContactUs ref={contactUsRef} />
                     <HomeFooter />
-                </>} />
+                </React.Fragment>} />
                 <Route path="customize" element={
                     <ProtectedRoute>
                         <Customize />

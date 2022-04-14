@@ -16,7 +16,7 @@ function BaseSelect(props) {
         });
     }
     return (
-        <>
+        <React.Fragment>
             <h4 className='customize-card-title'>Select your Base</h4>
             <div className='base-select-content'>
                 <div className={`base-select-content-item`} data-base="shea butter" onClick={selectItem} >
@@ -28,7 +28,7 @@ function BaseSelect(props) {
                     <p data-base="glycerin">Glycerin</p>
                 </div>
             </div>
-        </>
+        </React.Fragment>
     )
 }
 

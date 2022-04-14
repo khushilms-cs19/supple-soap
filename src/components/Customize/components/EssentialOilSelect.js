@@ -19,7 +19,7 @@ function EssentialOilSelect() {
         });
     }
     return (
-        <>
+        <React.Fragment>
             <h4 className='customize-card-title'>Select your Essential</h4>
             <div className='essential-oil-select-content' onClick={selectItem}>
                 <div className='essential-oil-select-content-item' data-essential-oil="cinnamon oil">
@@ -47,7 +47,7 @@ function EssentialOilSelect() {
                     <p data-essential-oil="berry oil">Berry Oil</p>
                 </div>
             </div>
-        </>
+        </React.Fragment>
     )
 }
 
