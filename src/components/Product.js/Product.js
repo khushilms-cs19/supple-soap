@@ -52,6 +52,7 @@ function Product(props) {
                 payload: data.data.cart,
             });
             quantityRef.current.value = 1;
+            props.setShowCart(true);
         }).catch((err) => {
             alert("There was some error", err);
         })

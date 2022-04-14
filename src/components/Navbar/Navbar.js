@@ -10,11 +10,10 @@ function Navbar(props) {
     const [currentMove, setCurrentMove] = useState("up");
     const [prevScrollY, setPrevScrollY] = useState(window.scrollY);
     const userData = useSelector((data) => data.userData);
-    const [showCart, setShowCart] = useState(false);
+    // const [showCart, setShowCart] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
-    // const history = useHistory();
     const logoutUser = () => {
         localStorage.clear();
         dispatch({
@@ -23,7 +22,7 @@ function Navbar(props) {
         navigate("/");
     }
     const closeCartModal = () => {
-        setShowCart(false);
+        props.setShowCart(false);
     }
     useEffect(() => {
         const onScroll = () => {
@@ -34,13 +33,11 @@ function Navbar(props) {
             }
             setPrevScrollY(window.scrollY);
         }
-        // window.removeEventListener("scroll", onScroll);
         window.addEventListener("scroll", onScroll);
         return () => {
             window.removeEventListener("scroll", onScroll);
         }
     }, [prevScrollY]);
-    // const direction = prevScrollY >= window.scrollY ? "up" : "down";
     return (
         <nav className='navbar-container' style={{ top: currentMove === "down" ? "-90px" : "0" }} >
             <img src={logonew} alt="logo" className='navbar-img' />
@@ -73,7 +70,7 @@ function Navbar(props) {
                         <>
                             <button className='navbar-buttons-login' onClick={logoutUser}>Logout</button>
                             <div className='navbar-buttons-cart-container' >
-                                <ShoppingCartIcon fontSize='large' color="#554e45" onClick={() => setShowCart((prevState) => {
+                                <ShoppingCartIcon fontSize='large' color="#554e45" onClick={() => props.setShowCart((prevState) => {
                                     if (location.pathname !== "/user/checkout")
                                         return !prevState;
                                     else
@@ -81,7 +78,7 @@ function Navbar(props) {
                                 })} />
                                 <p className='navbar-buttons-cart-size'>{userData.cart.regularProducts.length + userData.cart.customizedProducts.length}</p>
                                 {
-                                    showCart && location.pathname !== "/user/checkout" &&
+                                    props.showCart && location.pathname !== "/user/checkout" &&
                                     < CartDetails closeCartModal={closeCartModal} mainPage={false} />
                                 }
                             </div>
@@ -92,9 +89,19 @@ function Navbar(props) {
                             <button onClick={props.openLoginModal} className='navbar-buttons-login'>Log in</button>
                         </>
                 }
-                <div className='user-img-container'>
-                    <img src={user} alt="user" className='user-img' />
-                </div>
+                {
+                    userData.isAuthenticated ?
+                        <Link to="/user/profile">
+                            <div className='user-img-container'>
+                                <img src={user} alt="user" className='user-img' />
+                            </div>
+                        </Link>
+                        :
+                        <div className='user-img-container' onClick={props.openSignupModal}>
+                            <img src={user} alt="user" className='user-img' />
+                        </div>
+
+                }
             </div>
         </nav >
     )

@@ -5,6 +5,20 @@ import axios from 'axios';
 import { userConstants } from '../../redux/actions/userActions';
 import soap from "../../images/soap.png";
 import { useLocation, useNavigate } from 'react-router-dom';
+// import Razorpay from "razorpay";
+const loadRazorPay = () => {
+    return new Promise((resolve) => {
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        document.body.appendChild(script);
+        script.onload = () => {
+            resolve(true);
+        }
+        script.onerror = () => {
+            resolve(false);
+        }
+    })
+}
 function CartDetails(props) {
     const userData = useSelector((state) => state.userData);
     const dispatch = useDispatch();
@@ -13,101 +27,172 @@ function CartDetails(props) {
     const capitalizeName = (name) => {
         return name.split(" ").map((n) => n[0].toUpperCase() + n.slice(1)).join(" ");
     }
-    const removeFromCartRegular = (productId) => {
+    // const displayRazorPay = async () => {
+    //     const res = await loadRazorPay();
+    //     if (!res) {
+    //         alert("Razorpay SDK failed to load. are you online?");
+    //         return;
+    //     }
+    //     var options = {
+    //         key: "rzp_test_VLLfMJPNaGSkxT", // Enter the Key ID generated from the Dashboard
+    //         amount: "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    //         currency: "INR",
+    //         name: "Acme Corp",
+    //         description: "Test Transaction",
+    //         image: "https://example.com/your_logo",
+    //         order_id: "order_IluGWxBm9U8zJ8", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    //         callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
+    //         prefill: {
+    //             "name": "Gaurav Kumar",
+    //             "email": "gaurav.kumar@example.com",
+    //             "contact": "9999999999"
+    //         },
+    //         notes: {
+    //             "address": "Razorpay Corporate Office"
+    //         },
+    //         theme: {
+    //             "color": "#3399cc"
+    //         }
+    //     };
+    //     // var rzp1 = new Razorpay(options);
+    // }
+
+    const updateCartInDB = async (cartData) => {
+        axios({
+            method: "PUT",
+            baseURL: "http://localhost:5000/user/cart/update",
+            data: cartData,
+            headers: {
+                "Authentication": localStorage.getItem("user"),
+            }
+        }).then((data) => {
+            console.log(data.data);
+            dispatch({
+                type: userConstants.UPDATE_CART_DATA,
+                payload: data.data.cart,
+            });
+        }).catch((err) => {
+            alert("There was some error", err);
+        })
+    }
+    const removeFromCartRegular = async (productId) => {
         // if (!userData.isAuthenticated) {
         //     props.openSignupModal();
         //     return;
         // }
         const cartData = [...userData.cart.regularProducts].filter((item) => item.productId !== productId);
-
-        axios({
-            method: "PUT",
-            baseURL: "http://localhost:5000/user/cart/update",
-            data: {
-                ...userData.cart,
-                regularProducts: cartData,
-            },
-            headers: {
-                "Authentication": localStorage.getItem("user"),
-            }
-        }).then((data) => {
-            console.log(data.data);
-            dispatch({
-                type: userConstants.UPDATE_CART_DATA,
-                payload: data.data.cart,
-            });
-        }).catch((err) => {
-            alert("There was some error", err);
-        })
+        const finalCartData = {
+            ...userData.cart,
+            regularProducts: cartData,
+        }
+        await updateCartInDB(finalCartData);
+        // axios({
+        //     method: "PUT",
+        //     baseURL: "http://localhost:5000/user/cart/update",
+        //     data: {
+        //         ...userData.cart,
+        //         regularProducts: cartData,
+        //     },
+        //     headers: {
+        //         "Authentication": localStorage.getItem("user"),
+        //     }
+        // }).then((data) => {
+        //     console.log(data.data);
+        //     dispatch({
+        //         type: userConstants.UPDATE_CART_DATA,
+        //         payload: data.data.cart,
+        //     });
+        // }).catch((err) => {
+        //     alert("There was some error", err);
+        // })
     }
-    const removeFromCartCustomized = (productIndex) => {
+    const removeFromCartCustomized = async (productIndex) => {
         // if (!userData.isAuthenticated) {
         //     props.openSignupModal();
         //     return;
         // }
         const cartData = [...userData.cart.customizedProducts].filter((item, index) => index !== productIndex);
-        axios({
-            method: "PUT",
-            baseURL: "http://localhost:5000/user/cart/update",
-            data: {
-                ...userData.cart,
-                customizedProducts: cartData,
-            },
-            headers: {
-                "Authentication": localStorage.getItem("user"),
-            }
-        }).then((data) => {
-            console.log(data.data);
-            dispatch({
-                type: userConstants.UPDATE_CART_DATA,
-                payload: data.data.cart,
-            });
-        }).catch((err) => {
-            alert("There was some error", err);
-        })
+        const finalCartData = {
+            ...userData.cart,
+            customizedProducts: cartData,
+        };
+        await updateCartInDB(finalCartData);
+        // axios({
+        //     method: "PUT",
+        //     baseURL: "http://localhost:5000/user/cart/update",
+        //     data: {
+        //         ...userData.cart,
+        //         customizedProducts: cartData,
+        //     },
+        //     headers: {
+        //         "Authentication": localStorage.getItem("user"),
+        //     }
+        // }).then((data) => {
+        //     console.log(data.data);
+        //     dispatch({
+        //         type: userConstants.UPDATE_CART_DATA,
+        //         payload: data.data.cart,
+        //     });
+        // }).catch((err) => {
+        //     alert("There was some error", err);
+        // })
     }
     const placeOrderHandler = async () => {
         const cartData = userData.cart;
         // props.closeCartModal();
         // console.log(cartData);
-        if (cartData.regularProducts.length !== 0) {
+        if (cartData.regularProducts.length !== 0 || cartData.customizedProducts.length !== 0) {
             axios({
                 method: "POST",
                 baseURL: "http://localhost:5000/order/regular",
-                data: cartData.regularProducts,
+                data: cartData,
                 headers: {
                     "Authentication": localStorage.getItem("user"),
                 }
-            }).then((data) => {
+            }).then(async (data) => {
                 console.log(data.data);
                 dispatch({
                     type: userConstants.USER_CLEAR_REGULAR_PRODUCTS
                 });
-            }).catch((err) => {
-                console.log(err);
-            })
-        }
-        if (cartData.customizedProducts.length !== 0) {
-            axios({
-                method: "POST",
-                baseURL: "http://localhost:5000/order/customized",
-                data: cartData.customizedProducts,
-                headers: {
-                    "Authentication": localStorage.getItem("user"),
-                }
-            }).then((data) => {
-                console.log(data.data);
                 dispatch({
-                    type: userConstants.USER_CLEAR_CUSTOMIZED_PRODUCTS,
+                    type: userConstants.USER_CLEAR_CUSTOMIZED_PRODUCTS
                 });
-                navigate("/");
+                await updateCartInDB({
+                    regularProducts: [],
+                    customizedProducts: [],
+                })
+                props.showMessage("The order has been placed successfully!");
             }).catch((err) => {
                 console.log(err);
+                props.showMessage(err);
             })
         }
+        // if (cartData.customizedProducts.length !== 0) {
+        //     console.log("customized product order placing");
+        //     axios({
+        //         method: "POST",
+        //         baseURL: "http://localhost:5000/order/customized",
+        //         data: cartData.customizedProducts,
+        //         headers: {
+        //             "Authentication": localStorage.getItem("user"),
+        //         }
+        //     }).then(async (data) => {
+        //         console.log(data.data);
+        //         dispatch({
+        //             type: userConstants.USER_CLEAR_CUSTOMIZED_PRODUCTS,
+        //         });
+        //         await updateCartInDB({
+        //             regularProducts: userData.cart.regularProducts,
+        //             customizedProducts: [],
+        //         })
+        //         navigate("/");
+        //     }).catch((err) => {
+        //         console.log(err);
+        //     })
+        // }
     }
     return (
-        <div className={`cart-modal-container ${!props.mainPage && "cart-modal-absolute"}`}>
+        <div className={`cart-modal-container ${!props.mainPage && "cart-modal-absolute"}`} >
             <div className='cart-modal-title'>
                 <h3 >My Cart</h3>
                 <div onClick={props.closeCartModal}>

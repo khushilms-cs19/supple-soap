@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const OtherProductItem = (props) => {
     const navigate = useNavigate();
     const goToSoapMainPage = () => {
+        window.scrollTo(0, 0);
         navigate(`/products/${props.link}`);
     }
     return (

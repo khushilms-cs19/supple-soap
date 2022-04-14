@@ -1,6 +1,5 @@
 import './App.css';
 import React, { useEffect, useRef, useState } from 'react';
-
 import BestSellers from './components/Home/BestSellers/BestSellers';
 import ExperienceSupple from './components/Home/ExperieceSupple/ExperienceSupple';
 import Navbar from './components/Navbar/Navbar';
@@ -24,6 +23,9 @@ function App() {
     const dispatch = useDispatch();
     const [showSignupModal, setShowSignupModal] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showCart, setShowCart] = useState(false);
+    const [showMessageModal, setShowMessageModal] = useState(false);
+    const [messageFromServer, setMessageFromServer] = useState("");
     const closeModal = () => {
         setShowSignupModal(false);
         setShowLoginModal(false);
@@ -33,6 +35,20 @@ function App() {
     }
     const openLoginModal = () => {
         setShowLoginModal(true);
+    }
+    const openMessageModal = () => {
+        setShowMessageModal(true);
+    }
+    const closeMessageModal = () => {
+        setShowMessageModal(false);
+    }
+    const showMessageFromServer = (message) => {
+        setMessageFromServer(message);
+        openMessageModal();
+        setTimeout(() => {
+            closeMessageModal();
+            setMessageFromServer("");
+        }, 3000);
     }
     const { doRequest: getAllProducts, errors: productsError } = useRequests({
         route: "/products",
@@ -83,7 +99,7 @@ function App() {
     }, []);
     return (
         <div className="App" >
-            <Navbar scrollToAbout={scrollToAbout} scrollToContact={scrollToContact} openSignupModal={openSignupModal} openLoginModal={openLoginModal} />
+            <Navbar scrollToAbout={scrollToAbout} scrollToContact={scrollToContact} openSignupModal={openSignupModal} openLoginModal={openLoginModal} showCart={showCart} setShowCart={setShowCart} />
             {
                 showSignupModal &&
                 <div className='modal-overlay'>
@@ -95,6 +111,19 @@ function App() {
                 <div className='modal-overlay'>
                     <LoginModal closeModal={closeModal} openSignupModal={openSignupModal} />
                 </div>
+            }
+            {
+                showMessageModal &&
+                <>
+                    <div className='modal-overlay'>
+                        <div className='main-modal-container'>
+                            <div className='main-modal-top'>
+                                <p className='modal-cross-button' onClick={closeMessageModal}>&#x292B;</p>
+                            </div>
+                            <p className='main-modal-message'>{messageFromServer}</p>
+                        </div>
+                    </div>
+                </>
             }
             <Routes>
                 <Route path='/' element={<>
@@ -110,9 +139,13 @@ function App() {
                     </ProtectedRoute>
                 } />
                 <Route path="products" element={<Products />} />
-                <Route path="products/:productId" element={<Product openSignupModal={openSignupModal} />} />
-                <Route path="/user/checkout" element={<Checkout />} />
-                <Route path="/user/profile" element={<Profile />} />
+                <Route path="products/:productId" element={<Product openSignupModal={openSignupModal} setShowCart={setShowCart} />} />
+                <Route path="/user/checkout" element={<Checkout showMessage={showMessageFromServer} />} />
+                <Route path="/user/profile" element={
+                    <ProtectedRoute>
+                        <Profile />
+                    </ProtectedRoute>
+                } />
                 <Route path="*" element={<p>The page does not exist</p>} />
             </Routes>
         </div>

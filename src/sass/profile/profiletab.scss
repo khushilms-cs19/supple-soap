@@ -1,8 +1,10 @@
 .profile-tab {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   input {
+    width: 100%;
     border-radius: 5px;
     border: none;
     height: 1.5rem;
@@ -11,6 +13,7 @@
     padding: 5px 10px;
   }
   textarea {
+    width: 100%;
     margin: 10px 0px;
     padding: 5px 10px;
     border-radius: 5px;
@@ -19,7 +22,22 @@
     font-size: 1.2rem;
   }
   label {
+    width: 100%;
     padding: 0px 10px;
     font-size: 1.2rem;
+  }
+  button {
+    width: 7rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 10px;
+    font-size: large;
+    transition: all 0.3s;
+    background-color: $color-primary-footer;
+    margin: 10px 0px;
+    &:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+    }
   }
 }

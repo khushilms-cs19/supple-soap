@@ -29,6 +29,7 @@ const OrderItem = (props) => {
         <img src={props.item.image} alt="soap" />
         <p>{props.item.name}</p>
         <span>{`x${props.item.quantity}`}</span>
+        <p>Status : {props.status}</p>
     </div>)
 }
 const CustomizedOrderItem = (props) => {
@@ -41,7 +42,7 @@ const CustomizedOrderItem = (props) => {
 function Orders() {
     const [suppleProducts, setSuppleProducts] = useState([]);
     const [customizedProducts, setCustomizedProducts] = useState([]);
-    const [activeTab, setActiveTab] = useState("customized");
+    const [activeTab, setActiveTab] = useState("supple");
 
     const { doRequest: getUserOrdersSupple, errors: suppleError } = useRequests({
         route: "/user/orders",
@@ -61,32 +62,30 @@ function Orders() {
     const selectCustomized = () => {
         setActiveTab("customized");
     }
-    console.log(suppleProducts);
-    console.log(customizedProducts);
     return (
-        <div>
-            <h3>Your Orders</h3>
-            <div>
-                <button onClick={selectSupple}>Supple Products</button>
-                <button onClick={selectCustomized}>Customized Products</button>
+        <div className='order-tab-container'>
+            <h3 className='order-tab-title'>Your Orders</h3>
+            <div className='order-tab-select-inner-tab'>
+                <button onClick={selectSupple} className={`order-tab-select-inner-tab-button ${activeTab === "supple" ? "profile-active-button" : ""}`}>Supple Products</button>
+                <button onClick={selectCustomized} className={`order-tab-select-inner-tab-button ${activeTab === "customized" ? "profile-active-button" : ""}`}>Customized Products</button>
             </div>
             {
                 suppleProducts &&
-                <div>
+                <div className='order-tab-content'>
                     {
                         activeTab === "supple" &&
                         <div>
                             {
                                 suppleProducts.map((product, index) => {
-                                    return <div>
-                                        <div>
+                                    return <div className='order-tab-content-container'>
+                                        <div className='order-tab-content-title'>
                                             <p>{index + 1}. {getDate(product.createdAt)} </p>
                                             <p>₹{product.totalAmount}</p>
                                         </div>
                                         {
-                                            product.productDetails.map((product) => {
+                                            product.productDetails.map((prod) => {
                                                 return (
-                                                    <OrderItem item={product} />
+                                                    <OrderItem item={prod} status={product.status} />
                                                 )
                                             })
                                         }
@@ -100,12 +99,15 @@ function Orders() {
                         <div>
                             {
                                 customizedProducts.map((product, index) => {
-                                    return <div>
-                                        <p>{index + 1}. {getDate(product.createdAt)}</p>
+                                    return <div className='order-tab-content-container'>
+                                        <div className='order-tab-content-title'>
+                                            <p>{index + 1}. {getDate(product.createdAt)}</p>
+                                            {/* <p>{product.totalAmount}</p> */}
+                                        </div>
                                         {
                                             product.products.map((prod) => {
                                                 return (
-                                                    <CustomizedOrderItem item={prod} />
+                                                    <CustomizedOrderItem item={prod} status={product.status} />
                                                 )
                                             })
                                         }

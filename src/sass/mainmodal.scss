@@ -1,0 +1,22 @@
+.main-modal {
+  &-container {
+    position: absolute;
+    z-index: 999;
+    background-color: white;
+    min-width: 20rem;
+    min-height: 5rem;
+    padding: 10px 20px;
+    border-radius: 10px;
+    p {
+      cursor: pointer;
+    }
+  }
+  &-top {
+    display: flex;
+    justify-content: flex-end;
+  }
+  &-message {
+    text-align: center;
+    font-size: large;
+  }
+}

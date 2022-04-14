@@ -1203,9 +1203,11 @@
 .profile-tab {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
 }
 .profile-tab input {
+  width: 100%;
   border-radius: 5px;
   border: none;
   height: 1.5rem;
@@ -1214,6 +1216,7 @@
   padding: 5px 10px;
 }
 .profile-tab textarea {
+  width: 100%;
   margin: 10px 0px;
   padding: 5px 10px;
   border-radius: 5px;
@@ -1222,8 +1225,88 @@
   font-size: 1.2rem;
 }
 .profile-tab label {
+  width: 100%;
   padding: 0px 10px;
   font-size: 1.2rem;
+}
+.profile-tab button {
+  width: 7rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 10px;
+  font-size: large;
+  transition: all 0.3s;
+  background-color: #a79481;
+  margin: 10px 0px;
+}
+.profile-tab button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.order-tab-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.order-tab-title {
+  margin: 10px;
+}
+.order-tab-select-inner-tab {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 20px;
+}
+.order-tab-select-inner-tab-button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.1rem;
+}
+.order-tab-content {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  max-height: 500px;
+}
+.order-tab-content-container {
+  border: 3px solid rgba(128, 128, 128, 0.2);
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px 0px;
+}
+.order-tab-content-title {
+  display: flex;
+  justify-content: space-between;
+  font-size: large;
+  font-weight: 600;
+}
+
+.profile-active-button {
+  border-bottom: 5px solid #a79481;
+}
+
+.main-modal-container {
+  position: absolute;
+  z-index: 999;
+  background-color: white;
+  min-width: 20rem;
+  min-height: 5rem;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+.main-modal-container p {
+  cursor: pointer;
+}
+.main-modal-top {
+  display: flex;
+  justify-content: flex-end;
+}
+.main-modal-message {
+  text-align: center;
+  font-size: large;
 }
 
 * {

@@ -35,6 +35,10 @@
 //profile
 @import "./profile/profile.scss";
 @import "./profile/profiletab.scss";
+@import "./profile/orderstab.scss";
+
+//modal
+@import "./mainmodal.scss";
 * {
   margin: 0;
   //   font-family: "Besley", serif;
