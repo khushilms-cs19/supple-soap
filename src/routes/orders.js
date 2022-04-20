@@ -7,6 +7,7 @@ import { customizedOrder } from "../models/CustomizedOrders.js";
 import transporter from "../db/mailer.js";
 import { users } from "../models/Users.js";
 import Razorpay from 'razorpay';
+import shortid from "shortid";
 const router = Router();
 const instance = new Razorpay({
     key_id: process.env.RAZORKEYID,
@@ -37,7 +38,7 @@ const formulateMail = (listProducts) => {
         <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;">${product.productData.name}</td>
         <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;">${product.quantity}</td>
         <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;">${product.productData.price}</td>
-        <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;">${productPriceTotal}</td>
+        <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;">₹${productPriceTotal}</td>
       </tr>`
         // return `<p>${index + 1}. ${product.productData.name} quantity: ${product.quantity}</p>`
         return maildata;
@@ -59,7 +60,7 @@ const formulateMail = (listProducts) => {
     <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;"></td>
     <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;"></td>
     <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;"></td>
-    <td style="border: 2px solid black; border-collapse: collapse;padding: 10px;">${sumTotal}</td>
+    <td style="border: 2px solid black; border-collapse: collapse;padding: 10px;">₹${sumTotal}</td>
     </tr>
     </table>
     <div>
@@ -79,7 +80,7 @@ const formulateMailCustomized = (listProducts, sumTotal, mainIndex) => {
         <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;">Customized: ${capitalizeName(product.base)}, ${capitalizeName(product.scrub)}, ${capitalizeName(product.type)}, ${capitalizeName(product.fragrance)}, ${capitalizeName(product.essentialOil)}</td>
         <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;">${product.quantity}</td>
         <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;">${200}</td>
-        <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;">${productPriceTotal}</td>
+        <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;">₹${productPriceTotal}</td>
       </tr>
       `
         // return `<p>${index + 1}. ${product.productData.name} quantity: ${product.quantity}</p>`
@@ -93,7 +94,7 @@ const formulateMailCustomized = (listProducts, sumTotal, mainIndex) => {
     <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;"></td>
     <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;"></td>
     <td style="border: 1px solid black; border-collapse: collapse;padding: 10px;"></td>
-    <td style="border: 2px solid black; border-collapse: collapse;padding: 10px;">${sumTotal}</td>
+    <td style="border: 2px solid black; border-collapse: collapse;padding: 10px;">₹${sumTotal}</td>
     </tr>
     </table>
     <div>
@@ -106,6 +107,46 @@ const formulateMailCustomized = (listProducts, sumTotal, mainIndex) => {
 const capitalizeName = (name) => {
     return name.split(" ").map((n) => n[0].toUpperCase() + n.slice(1)).join(" ");
 }
+
+router.post("/order/razorpay-create-order", async (req, res) => {
+    if (!req.headers.authentication) {
+        return res.status(403).send({
+            error: "You need to login first",
+        });
+    }
+    const regularProducts = req.body.regularProducts;
+    const customizedProducts = req.body.customizedProducts;
+    let finalTotalAmount = 0;
+    let regularProductsTotalAmount;
+    if (regularProducts.length !== 0) {
+        regularProductsTotalAmount = await getTotalAmount(regularProducts);
+        finalTotalAmount += regularProductsTotalAmount;
+    }
+    if (customizedProducts.length !== 0) {
+        let customizedProductsTotalAmount = 0;
+        customizedProducts.map((product) => {
+            customizedProductsTotalAmount += product.quantity * 200;
+        });
+        finalTotalAmount += customizedProductsTotalAmount;
+    }
+    const options = {
+        // amount: 100,
+        amount: finalTotalAmount * 100,
+        currency: "INR",
+        receipt: shortid.generate(),
+    }
+    instance.orders.create(options, (err, order) => {
+        if (err) {
+            res.status(500).send({
+                message: "There was some error creating the order.",
+            });
+        } else {
+            res.status(201).send({
+                orderData: order,
+            });
+        }
+    });
+})
 router.post("/order/regular", async (req, res) => {
     if (!req.headers.authentication) {
         return res.status(403).send({
@@ -114,6 +155,8 @@ router.post("/order/regular", async (req, res) => {
     }
     const regularProducts = req.body.regularProducts;
     const customizedProducts = req.body.customizedProducts;
+    const razorpayDetails = req.body.razorpay;
+    console.log(razorpayDetails);
     let finalTotalAmount = 0;
     let regularProductsTotalAmount;
     let customizedOrderData;
@@ -158,6 +201,9 @@ router.post("/order/regular", async (req, res) => {
                 }),
                 userId: mongoose.Types.ObjectId(userId),
                 totalAmount: regularProductsTotalAmount,
+                razorpay_payment_id: razorpayDetails.paymentId,
+                razorpay_order_id: razorpayDetails.orderId,
+                razorpay_signature: razorpayDetails.signature,
             }
 
             orders.create(orderData, (err, data) => {
@@ -202,6 +248,9 @@ router.post("/order/regular", async (req, res) => {
             const finalData = {
                 userId: mongoose.Types.ObjectId(userId),
                 products: customizedOrderData,
+                razorpay_payment_id: razorpayDetails.paymentId,
+                razorpay_order_id: razorpayDetails.orderId,
+                razorpay_signature: razorpayDetails.signature,
             }
             customizedOrder.create(finalData, (err, data) => {
                 if (err) {

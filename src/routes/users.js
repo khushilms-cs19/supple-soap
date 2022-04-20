@@ -100,7 +100,24 @@ router.post("/user/signup", async (req, res) => {
         })
     })
 });
-
+router.post("/user/profile/update", async (req, res) => {
+    const userId = jwt.verify(req.headers.authentication, process.env.JWTSECRET);
+    const userData = {
+        name: req.body.name,
+        email: req.body.email,
+        address: req.body.address,
+        phoneno: req.body.phoneno,
+    }
+    users.findByIdAndUpdate(userId, userData).then((data) => {
+        res.status(201).send({
+            message: "Your data has been updated.",
+        });
+    }).catch((err) => {
+        res.status(403).send({
+            message: "You have to login to make changes."
+        });
+    });
+})
 const getAllProductsDetails = async (allOrders) => {
     // console.log(allOrders);
     const allOrderDetails = allOrders.map(async (order) => {

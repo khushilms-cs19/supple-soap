@@ -29,7 +29,8 @@ const CustomizedProduct = new mongoose.Schema({
         type: Number,
         required: true,
         default: 1,
-    }
+    },
+
 })
 const CustomizedOrderSchema = new mongoose.Schema({
     userId: {
@@ -44,6 +45,18 @@ const CustomizedOrderSchema = new mongoose.Schema({
         type: String,
         required: true,
         default: "order_placed",
+    },
+    razorpay_payment_id: {
+        type: String,
+        required: true,
+    },
+    razorpay_order_id: {
+        type: String,
+        required: true,
+    },
+    razorpay_signature: {
+        type: String,
+        required: true,
     }
 }, {
     timestamps: true,

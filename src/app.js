@@ -19,17 +19,19 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
-app.use(cors({
-    origin: "*",
-    methods: [
-        "GET",
-        "POST",
-    ],
-    allowedHeaders: [
-        "Content-Type",
-        "Authentication",
-    ],
-}));
+// app.use(cors({
+//     origin: "*",
+//     methods: [
+//         "GET",
+//         "POST",
+//         "PUT",
+//     ],
+//     allowedHeaders: [
+//         "Content-Type",
+//         "Authentication",
+//     ],
+// }));
+app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.get("/", (req, res) => {
