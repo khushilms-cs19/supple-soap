@@ -1,61 +1,81 @@
-import React from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 // import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import { userConstants } from '../../redux/actions/userActions';
 import soap from "../../images/soap.png";
 import { useLocation, useNavigate } from 'react-router-dom';
-// import Razorpay from "razorpay";
-const loadRazorPay = () => {
-    return new Promise((resolve) => {
-        const script = document.createElement("script");
-        script.src = "https://checkout.razorpay.com/v1/checkout.js";
-        document.body.appendChild(script);
-        script.onload = () => {
-            resolve(true);
-        }
-        script.onerror = () => {
-            resolve(false);
-        }
-    })
-}
+
 function CartDetails(props) {
     const userData = useSelector((state) => state.userData);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
+    const [razorPayOrder, setRazorPayOrder] = useState({});
     const capitalizeName = (name) => {
         return name.split(" ").map((n) => n[0].toUpperCase() + n.slice(1)).join(" ");
     }
-    // const displayRazorPay = async () => {
-    //     const res = await loadRazorPay();
-    //     if (!res) {
-    //         alert("Razorpay SDK failed to load. are you online?");
-    //         return;
-    //     }
-    //     var options = {
-    //         key: "rzp_test_VLLfMJPNaGSkxT", // Enter the Key ID generated from the Dashboard
-    //         amount: "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    //         currency: "INR",
-    //         name: "Acme Corp",
-    //         description: "Test Transaction",
-    //         image: "https://example.com/your_logo",
-    //         order_id: "order_IluGWxBm9U8zJ8", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    //         callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
-    //         prefill: {
-    //             "name": "Gaurav Kumar",
-    //             "email": "gaurav.kumar@example.com",
-    //             "contact": "9999999999"
-    //         },
-    //         notes: {
-    //             "address": "Razorpay Corporate Office"
-    //         },
-    //         theme: {
-    //             "color": "#3399cc"
-    //         }
-    //     };
-    //     // var rzp1 = new Razorpay(options);
-    // }
+    const calculateTotalPrice = () => {
+        const regularProducts = userData.cart.regularProducts;
+        const customizedProducts = userData.cart.customizedProducts;
+        let totalPrice = 0;
+        regularProducts.forEach((ele) => {
+            totalPrice += ele.productData.price;
+        });
+        customizedProducts.forEach((ele) => {
+            totalPrice += ele.quantity * 200;
+        });
+        return totalPrice;
+    }
+    const createRazorpayOrder = async () => {
+        return await new Promise((resolve, reject) => {
+            axios({
+                method: "post",
+                baseURL: "http://localhost:5000/order/razorpay-create-order",
+                data: userData.cart,
+                headers: {
+                    "Authentication": localStorage.getItem("user"),
+                }
+            }).then((data) => {
+                console.log(data.data.orderData);
+                setRazorPayOrder(data.data.orderData);
+                resolve(data.data.orderData);
+            }).catch((err) => {
+                console.log(err);
+            })
+        });
+    }
+    const displayRazorPay = async () => {
+        // const res = await loadRazorPay();
+        // if (!res) {
+        //     alert("Razorpay SDK failed to load. are you online?");
+        //     return;
+        // }
+        // console.log(razorPayOrder);
+        const razorpayOrderData = await createRazorpayOrder();
+        console.log(razorpayOrderData);
+        const options = {
+            key: "rzp_test_VLLfMJPNaGSkxT", // Enter the Key ID generated from the Dashboard
+            amount: razorpayOrderData.amount_due, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            currency: "INR",
+            name: "Supple Soap",
+            description: "Test Transaction",
+            order_id: razorpayOrderData.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            handler: function (response) {
+                // alert(response.razorpay_payment_id);
+                // alert(response.razorpay_order_id);
+                // alert(response.razorpay_signature);
+                placeOrderHandler(response);
+            },
+            prefill: {
+                name: userData.name,
+                email: userData.email,
+                contact: userData.phoneno,
+            },
+        };
+        let rzp1 = new window.Razorpay(options);
+        rzp1.open();
+    };
 
     const updateCartInDB = async (cartData) => {
         axios({
@@ -86,25 +106,7 @@ function CartDetails(props) {
             regularProducts: cartData,
         }
         await updateCartInDB(finalCartData);
-        // axios({
-        //     method: "PUT",
-        //     baseURL: "http://localhost:5000/user/cart/update",
-        //     data: {
-        //         ...userData.cart,
-        //         regularProducts: cartData,
-        //     },
-        //     headers: {
-        //         "Authentication": localStorage.getItem("user"),
-        //     }
-        // }).then((data) => {
-        //     console.log(data.data);
-        //     dispatch({
-        //         type: userConstants.UPDATE_CART_DATA,
-        //         payload: data.data.cart,
-        //     });
-        // }).catch((err) => {
-        //     alert("There was some error", err);
-        // })
+
     }
     const removeFromCartCustomized = async (productIndex) => {
         // if (!userData.isAuthenticated) {
@@ -117,35 +119,22 @@ function CartDetails(props) {
             customizedProducts: cartData,
         };
         await updateCartInDB(finalCartData);
-        // axios({
-        //     method: "PUT",
-        //     baseURL: "http://localhost:5000/user/cart/update",
-        //     data: {
-        //         ...userData.cart,
-        //         customizedProducts: cartData,
-        //     },
-        //     headers: {
-        //         "Authentication": localStorage.getItem("user"),
-        //     }
-        // }).then((data) => {
-        //     console.log(data.data);
-        //     dispatch({
-        //         type: userConstants.UPDATE_CART_DATA,
-        //         payload: data.data.cart,
-        //     });
-        // }).catch((err) => {
-        //     alert("There was some error", err);
-        // })
+
     }
-    const placeOrderHandler = async () => {
+    const placeOrderHandler = async (razorpayDetails) => {
         const cartData = userData.cart;
-        // props.closeCartModal();
-        // console.log(cartData);
         if (cartData.regularProducts.length !== 0 || cartData.customizedProducts.length !== 0) {
             axios({
                 method: "POST",
                 baseURL: "http://localhost:5000/order/regular",
-                data: cartData,
+                data: {
+                    ...cartData,
+                    razorpay: {
+                        paymentId: razorpayDetails.razorpay_payment_id,
+                        orderId: razorpayDetails.razorpay_order_id,
+                        signature: razorpayDetails.razorpay_signature,
+                    }
+                },
                 headers: {
                     "Authentication": localStorage.getItem("user"),
                 }
@@ -167,29 +156,6 @@ function CartDetails(props) {
                 props.showMessage(err);
             })
         }
-        // if (cartData.customizedProducts.length !== 0) {
-        //     console.log("customized product order placing");
-        //     axios({
-        //         method: "POST",
-        //         baseURL: "http://localhost:5000/order/customized",
-        //         data: cartData.customizedProducts,
-        //         headers: {
-        //             "Authentication": localStorage.getItem("user"),
-        //         }
-        //     }).then(async (data) => {
-        //         console.log(data.data);
-        //         dispatch({
-        //             type: userConstants.USER_CLEAR_CUSTOMIZED_PRODUCTS,
-        //         });
-        //         await updateCartInDB({
-        //             regularProducts: userData.cart.regularProducts,
-        //             customizedProducts: [],
-        //         })
-        //         navigate("/");
-        //     }).catch((err) => {
-        //         console.log(err);
-        //     })
-        // }
     }
     return (
         <div className={`cart-modal-container ${!props.mainPage && "cart-modal-absolute"}`} >
@@ -212,7 +178,7 @@ function CartDetails(props) {
                                     <img src={item.productData.image} alt="soap" />
                                     <p>{item.productData.name}</p>
                                     <span>{`x${item.quantity}`}</span>
-
+                                    <span>₹{item.productData.price * item.quantity}</span>
                                     {/* <DeleteIcon fontSize='medium' onClick={() => removeFromCartRegular(item.productId)} /> */}
                                     <img src="https://img.icons8.com/ios-glyphs/30/000000/filled-trash.png" onClick={() => removeFromCartRegular(item.productId)} style={{ width: "30px" }} />
                                 </div>
@@ -232,6 +198,7 @@ function CartDetails(props) {
                                             <img src={soap} alt="soap" />
                                             <p>{capitalizeName(item.base)}, {capitalizeName(item.scrub)}, {capitalizeName(item.type)}, {capitalizeName(item.fragrance)}, {capitalizeName(item.essentialOil)}</p>
                                             <span>{`x${item.quantity}`}</span>
+                                            <span>₹{item.quantity * 200}</span>
                                             {/* <DeleteIcon fontSize='medium' onClick={() => removeFromCartCustomized(index)} /> */}
                                             <img src="https://img.icons8.com/ios-glyphs/30/000000/filled-trash.png" onClick={() => removeFromCartCustomized(index)} style={{ width: "30px" }} />
                                         </div>
@@ -239,6 +206,12 @@ function CartDetails(props) {
                                 })
                         }
                     </React.Fragment>
+                }
+                {
+                    (userData.cart.regularProducts.length !== 0 || userData.cart.customizedProducts.length !== 0) &&
+                    <div className='cart-modal-total-price'>
+                        <p>Total: ₹{calculateTotalPrice()}</p>
+                    </div>
                 }
             </div>
             {
@@ -249,7 +222,7 @@ function CartDetails(props) {
                         Checkout
                     </button>
                     :
-                    <button className='cart-modal-button-checkout' disabled={userData.cart.regularProducts.length === 0 && userData.cart.customizedProducts.length === 0} onClick={placeOrderHandler}>
+                    <button className='cart-modal-button-checkout' disabled={userData.cart.regularProducts.length === 0 && userData.cart.customizedProducts.length === 0} onClick={displayRazorPay}>
                         Place Order
                     </button>
             }

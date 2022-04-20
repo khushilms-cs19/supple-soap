@@ -1,18 +1,29 @@
+import axios from 'axios';
 import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-function ProfileDetails() {
+function ProfileDetails(props) {
     const nameRef = useRef(null);
     const emailRef = useRef(null);
     const addressRef = useRef(null);
     const phonenoRef = useRef(null);
     const userData = useSelector((state) => state.userData);
-    const updateUserProfile = () => {
-        console.log({
-            name: nameRef.current.value,
-            email: emailRef.current.value,
-            address: addressRef.current.value,
-            phoneno: phonenoRef.current.value,
+    const updateUserProfile = async () => {
+        axios({
+            url: "http://localhost:5000/user/profile/update",
+            method: "POST",
+            data: {
+                name: nameRef.current.value,
+                email: emailRef.current.value,
+                address: addressRef.current.value,
+                phoneno: phonenoRef.current.value,
+            },
+            headers: {
+                "Authentication": localStorage.getItem("user"),
+            }
+        }).then((data) => {
+            // console.log(data);
+            props.showMessage(data.data.message);
         });
     }
     return (

@@ -54,6 +54,10 @@
     img {
       width: 5rem;
       border-radius: 5px;
+      &:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+      }
     }
     p {
       width: 60%;
@@ -82,6 +86,15 @@
   //     height: 2.5rem;
   //     margin: 20px;
   //   }
+  &-total-price {
+    width: 80%;
+    border-top: 3px solid grey;
+    border-bottom: 3px solid grey;
+    padding: 10px;
+    text-align: right;
+    font-size: large;
+    font-weight: bold;
+  }
 }
 .cart-modal-absolute {
   transform: translate(-90%, 10px);

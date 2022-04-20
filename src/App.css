@@ -1111,6 +1111,10 @@
   width: 5rem;
   border-radius: 5px;
 }
+.cart-modal-item img:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
 .cart-modal-item p {
   width: 60%;
 }
@@ -1131,6 +1135,15 @@
   cursor: pointer;
   transform: scale(1.05);
   box-shadow: 0px 7px 18px -3px rgba(0, 0, 0, 0.2);
+}
+.cart-modal-total-price {
+  width: 80%;
+  border-top: 3px solid grey;
+  border-bottom: 3px solid grey;
+  padding: 10px;
+  text-align: right;
+  font-size: large;
+  font-weight: bold;
 }
 
 .cart-modal-absolute {

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import user from "../../images/user.png";
 import Orders from './Orders';
 import ProfileDetails from './ProfileDetails';
-function Profile() {
+function Profile(props) {
     const userData = useSelector((state) => state.userData);
     const [activeTab, setActiveTab] = useState("profile");
     const selectProfile = () => {
@@ -25,7 +25,7 @@ function Profile() {
             <div className='user-profile-tab-active'>
                 {
                     activeTab === "profile" &&
-                    <ProfileDetails />
+                    <ProfileDetails showMessage={props.showMessage} />
                 }
                 {
                     activeTab === "orders" &&

@@ -143,7 +143,7 @@ function App() {
                 <Route path="/user/checkout" element={<Checkout showMessage={showMessageFromServer} />} />
                 <Route path="/user/profile" element={
                     <ProtectedRoute>
-                        <Profile />
+                        <Profile showMessage={showMessageFromServer} />
                     </ProtectedRoute>
                 } />
                 <Route path="*" element={<p>The page does not exist</p>} />

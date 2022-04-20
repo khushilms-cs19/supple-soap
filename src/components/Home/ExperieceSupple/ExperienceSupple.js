@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import stock1 from "../../../images/stock 1.jpg";
 import stock2 from "../../../images/stock 2.jpg";
 import stock3 from "../../../images/stock 3.jpg";
-// import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
-// import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
-// import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
+
 
 function ExperienceSupple() {
     const [activeSlide, setActiveSlide] = useState(0);
     const goNext = () => {
         setActiveSlide((prevValue) => (prevValue + 1) % 3);
     }
+    const navigate = useNavigate();
     const goPrev = () => {
         setActiveSlide((prevValue) => {
             if (prevValue === 0) {
@@ -40,7 +40,7 @@ function ExperienceSupple() {
                     <div className='slider-overlay-content'>
                         <h1>Experience Supple</h1>
                         <p>Premium Hand Made Bath Soaps</p>
-                        <button>Explore Now <img src="https://img.icons8.com/ios-filled/50/ffffff/forward--v1.png" style={{ width: "20px" }} /></button>
+                        <button onClick={() => navigate("/products")}>Explore Now <img src="https://img.icons8.com/ios-filled/50/ffffff/forward--v1.png" style={{ width: "20px" }} /></button>
                     </div>
                     <div className='slider-overlay-dots'>
                         <div className='slider-overlay-dots-container'>
