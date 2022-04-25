@@ -1,0 +1,199 @@
+.admin-page {
+  &-container {
+    padding-top: 6rem;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background-color: $color-secordary-footer;
+    h1 {
+      text-align: center;
+    }
+  }
+  &-tab-select {
+    box-sizing: border-box;
+    padding: 40px 0px 20px 0px;
+    border-bottom: 3px solid $color-primary-footer;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    button {
+      width: 12rem;
+      border: none;
+      border-radius: 10px;
+      height: 2.5rem;
+      font-size: large;
+      transition: all 0.3s;
+      &:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+      }
+    }
+  }
+  &-content {
+    margin: 10px;
+    border-radius: 5px;
+    padding: 20px;
+    min-height: 10%;
+    background-color: rgba($color: #000000, $alpha: 0.1);
+  }
+}
+.admin-orders-orderitem {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border-radius: 10px;
+  border: 1px solid black;
+  margin: 10px 0px;
+  padding: 20px;
+  box-sizing: border-box;
+  &-userdetails {
+    width: 40%;
+    box-sizing: border-box;
+    table {
+      column-gap: 30px;
+    }
+  }
+  &-orderdetails {
+    box-sizing: border-box;
+    width: 50%;
+  }
+}
+.admin-orders-productitem {
+  display: flex;
+  column-gap: 10px;
+  margin: 10px 0px;
+}
+.admin-orders-orderitem-buttons {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  button {
+    width: 10rem;
+    height: 2.5rem;
+    font-size: x-large;
+    background-color: $color-primary-footer;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.3s;
+    &:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+  }
+}
+.admin-orders-options {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px;
+  &-filter {
+    display: flex;
+    align-items: center;
+    width: 20%;
+    label {
+      font-size: larger;
+      padding: 0px 10px;
+      font-weight: 700;
+    }
+    select {
+      width: 100%;
+      height: 2rem;
+      padding: 5px;
+      font-size: larger;
+    }
+  }
+  &-search {
+    background-color: white;
+    width: 30%;
+    display: flex;
+    padding: 0px 10px;
+    box-sizing: border-box;
+    border-radius: 30px;
+    overflow: hidden;
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      height: 2rem;
+      border: none;
+      //   border-radius: 30px;
+      padding: 0px 10px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+.admin-orders-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.admin-orders-type-buttons {
+  display: flex;
+  justify-content: "space-between";
+  column-gap: 30px;
+  button {
+    border-radius: 10px;
+    border: none;
+    width: 15rem;
+    font-size: large;
+    padding: 0px 10px;
+    transition: all 0.3s;
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+    }
+  }
+}
+.admin-option-button-active {
+  border: 3px solid $color-primary-footer;
+}
+
+.admin-login {
+  &-container {
+    background-image: linear-gradient(
+      to bottom,
+      rgba(179, 148, 12, 0.5),
+      rgba(0, 0, 0, 0)
+    );
+    width: 100vw;
+    height: 100vh;
+    padding: 6rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: rgba($color: $color-primary-footer, $alpha: 0.5);
+    input {
+      width: 20rem;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 10px;
+      margin: 10px 0px;
+    }
+    button {
+      width: 7rem;
+      height: 2.5rem;
+      background-color: $color-primary-button;
+      border-radius: 5px;
+      border: none;
+      font-size: large;
+      font-weight: 600;
+      color: white;
+      margin: 10px 0px;
+      transition: all 0.3s;
+      &:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+      }
+    }
+  }
+}

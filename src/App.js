@@ -19,6 +19,10 @@ import LoginModal from './components/Modals/LoginModal';
 import Checkout from './components/Checkout/Checkout';
 import ProtectedRoute from './ProtectedRoute';
 import Profile from './components/Profile/Profile';
+import AdminProtectedRoute from './AdminProtectedRoute';
+import Admin from './components/Admin/Admin';
+import AdminContainer from './components/Admin/AdminContainer';
+import AdminLogin from './components/Admin/AdminLogin';
 function App() {
     const dispatch = useDispatch();
     const [showSignupModal, setShowSignupModal] = useState(false);
@@ -130,7 +134,7 @@ function App() {
                     <ExperienceSupple />
                     <BestSellers />
                     <About ref={aboutRef} />
-                    <ContactUs ref={contactUsRef} />
+                    <ContactUs ref={contactUsRef} showMessage={showMessageFromServer} />
                     <HomeFooter />
                 </React.Fragment>} />
                 <Route path="customize" element={
@@ -145,6 +149,14 @@ function App() {
                     <ProtectedRoute>
                         <Profile showMessage={showMessageFromServer} />
                     </ProtectedRoute>
+                } />
+                <Route path="/admin/dashboard" element={
+                    <AdminProtectedRoute>
+                        <Admin />
+                    </AdminProtectedRoute>
+                } />
+                <Route path="/admin/login" element={
+                    <AdminLogin />
                 } />
                 <Route path="*" element={<p>The page does not exist</p>} />
             </Routes>

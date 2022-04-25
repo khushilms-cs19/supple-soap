@@ -80,7 +80,6 @@ function Product(props) {
                         </div>
                         <div className='product-page-description-button-container'>
                             <button className='product-page-description-button' onClick={addToCart}>Add To Cart</button>
-                            <button className='product-page-description-button'>Order Now</button>
                         </div>
                     </div>
                 </div>

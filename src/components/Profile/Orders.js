@@ -83,9 +83,9 @@ function Orders() {
                                             <p>₹{product.totalAmount}</p>
                                         </div>
                                         {
-                                            product.productDetails.map((prod) => {
+                                            product.productDetails.map((prod, index) => {
                                                 return (
-                                                    <OrderItem item={prod} status={product.status} />
+                                                    <OrderItem item={prod} status={product.status} key={index} />
                                                 )
                                             })
                                         }
@@ -105,9 +105,9 @@ function Orders() {
                                             {/* <p>{product.totalAmount}</p> */}
                                         </div>
                                         {
-                                            product.products.map((prod) => {
+                                            product.products.map((prod, index) => {
                                                 return (
-                                                    <CustomizedOrderItem item={prod} status={product.status} />
+                                                    <CustomizedOrderItem item={prod} status={product.status} key={index} />
                                                 )
                                             })
                                         }

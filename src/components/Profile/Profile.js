@@ -6,6 +6,7 @@ import ProfileDetails from './ProfileDetails';
 function Profile(props) {
     const userData = useSelector((state) => state.userData);
     const [activeTab, setActiveTab] = useState("profile");
+    console.log(props);
     const selectProfile = () => {
         setActiveTab("profile");
     }

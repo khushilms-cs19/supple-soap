@@ -20,7 +20,7 @@ function CartDetails(props) {
         const customizedProducts = userData.cart.customizedProducts;
         let totalPrice = 0;
         regularProducts.forEach((ele) => {
-            totalPrice += ele.productData.price;
+            totalPrice += ele.productData.price * ele.quantity;
         });
         customizedProducts.forEach((ele) => {
             totalPrice += ele.quantity * 200;
