@@ -43,7 +43,7 @@ router.get("/user/data", async (req, res) => {
     try {
         const userId = jwt.verify(req.headers.authentication, process.env.JWTSECRET);
         users.findById(userId).then((data) => {
-            console.log(data);
+            // console.log(data);
             res.status(200).send({
                 ...data._doc,
             });
@@ -60,7 +60,7 @@ router.get("/user/data", async (req, res) => {
     }
 })
 router.put(("/user/cart/update"), async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     try {
         const userId = jwt.verify(req.headers.authentication, process.env.JWTSECRET);
         users.findByIdAndUpdate(userId, {
@@ -170,7 +170,7 @@ router.get("/user/orders", async (req, res) => {
         const userId = jwt.verify(req.headers.authentication, process.env.JWTSECRET);
         const userOrders = await getUserOrders(userId);
         // console.log("here");
-        console.log(userOrders);
+        // console.log(userOrders);
         const userOrderDetailsNew = await getAllProductsDetails(userOrders);
         const userCustomizedOrderData = await getUserCustomizedOrders(userId);
         // console.log(userOrderDetailsNew);

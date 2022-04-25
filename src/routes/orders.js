@@ -16,10 +16,11 @@ const instance = new Razorpay({
 
 
 const getTotalAmount = async (productsOrdered) => {
+    // console.log(productsOrdered)
     const promiseArray = productsOrdered.map((product) => {
         return new Promise((resolve, reject) => {
             products.findById(product.productId).then((data) => {
-                resolve(data.price);
+                resolve(data.price * product.quantity);
             })
         });
     });
@@ -28,7 +29,7 @@ const getTotalAmount = async (productsOrdered) => {
     })
 }
 const formulateMail = (listProducts) => {
-    console.log(listProducts);
+    // console.log(listProducts);
     let sumTotal = 0
     const mailarray = listProducts.regularProducts.map((product, index) => {
         const productPriceTotal = product.productData.price * product.quantity;
@@ -156,7 +157,7 @@ router.post("/order/regular", async (req, res) => {
     const regularProducts = req.body.regularProducts;
     const customizedProducts = req.body.customizedProducts;
     const razorpayDetails = req.body.razorpay;
-    console.log(razorpayDetails);
+    // console.log(razorpayDetails);
     let finalTotalAmount = 0;
     let regularProductsTotalAmount;
     let customizedOrderData;
@@ -190,6 +191,7 @@ router.post("/order/regular", async (req, res) => {
     //     console.log(order);
     //     res.send({ orderId: order.id });
     // })
+    let regularOrderPlacedId = undefined;
     try {
         if (regularProducts.length !== 0) {
             const orderData = {
@@ -213,6 +215,8 @@ router.post("/order/regular", async (req, res) => {
                         error: "cannot place the order at this time , please try again later.",
                     });
                 }
+                console.log("here order: ", data._doc._id);
+                regularOrderPlacedId = data._doc._id;
                 if (customizedProducts.length === 0) {
                     transporter.sendMail({
                         from: "taavadesingh420@gmail.com",
@@ -224,7 +228,7 @@ router.post("/order/regular", async (req, res) => {
                             console.log("Error occured while sending email");
                             console.log(err);
                         } else {
-                            console.log(info);
+                            // console.log(info);
                         }
                     })
                     return res.send({
@@ -245,9 +249,11 @@ router.post("/order/regular", async (req, res) => {
             //         quantity: product.quantity,
             //     }
             // });
+            console.log(regularOrderPlacedId);
             const finalData = {
                 userId: mongoose.Types.ObjectId(userId),
                 products: customizedOrderData,
+                associatedOrder: regularOrderPlacedId,
                 razorpay_payment_id: razorpayDetails.paymentId,
                 razorpay_order_id: razorpayDetails.orderId,
                 razorpay_signature: razorpayDetails.signature,
@@ -272,7 +278,7 @@ router.post("/order/regular", async (req, res) => {
                             console.log("Error occured while sending email");
                             console.log(err);
                         } else {
-                            console.log(info);
+                            // console.log(info);
                         }
                     })
                     return res.status(201).send({
@@ -320,7 +326,7 @@ router.post("/order/customized", async (req, res) => {
 
             })
         } else {
-            console.log(data._doc);
+            // console.log(data._doc);
             return res.status(201).send({
                 message: "The order is placed successfully",
             });

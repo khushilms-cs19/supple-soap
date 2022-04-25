@@ -10,12 +10,13 @@ router.post("/contactus", async (req, res) => {
         subject: req.body.subject,
         description: req.body.description,
     }
+    console.log(contactUsData);
     if (req.headers.authentication) {
         contactUsData.userId = jwt.verify(req.headers.authentication, process.env.JWTSECRET);
     }
     contactUs.create(contactUsData, (err, data) => {
         if (err) {
-            console.log(err);
+            // console.log(err);
             return res.status(500).send({
                 error: "There has been an error. Try again after some time.",
             });

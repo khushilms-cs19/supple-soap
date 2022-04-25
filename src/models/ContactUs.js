@@ -20,6 +20,10 @@ const ContactUsSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: false,
         default: null,
+    },
+    status: {
+        type: String,
+        default: "unattended",
     }
 }, {
     timestamps: true,

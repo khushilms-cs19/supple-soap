@@ -6,6 +6,7 @@ import { UserRoutes } from "./routes/users.js";
 import { OrdersRoutes } from "./routes/orders.js";
 import "dotenv/config";
 import { ContactUsRoutes } from "./routes/contactus.js";
+import { AdminRoutes } from "./routes/admin.js";
 // const express = require("express");
 // const cors = require("cors");
 // const { ProductsRoutes } = require("./routes/products");
@@ -41,6 +42,7 @@ app.use(ProductsRoutes);
 app.use(UserRoutes);
 app.use(OrdersRoutes);
 app.use(ContactUsRoutes);
+app.use(AdminRoutes);
 app.listen(PORT, () => {
     console.log(`server is running on PORT: ${PORT}`);
 });

@@ -50,6 +50,11 @@ const CustomizedOrderSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    associatedOrder: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "orders",
+        required: false,
+    },
     razorpay_order_id: {
         type: String,
         required: true,

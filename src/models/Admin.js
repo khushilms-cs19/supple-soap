@@ -1,9 +1,5 @@
-import { Schema, model } from "mongoose";
-const AdminSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-    },
+import mongoose from "mongoose";
+const AdminSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
@@ -17,4 +13,4 @@ const AdminSchema = new Schema({
         required: false,
     },
 });
-export const admin = model("admin", AdminSchema);
+export const admin = mongoose.model("admin", AdminSchema);
