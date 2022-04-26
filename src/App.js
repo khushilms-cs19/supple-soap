@@ -21,7 +21,6 @@ import ProtectedRoute from './ProtectedRoute';
 import Profile from './components/Profile/Profile';
 import AdminProtectedRoute from './AdminProtectedRoute';
 import Admin from './components/Admin/Admin';
-import AdminContainer from './components/Admin/AdminContainer';
 import AdminLogin from './components/Admin/AdminLogin';
 function App() {
     const dispatch = useDispatch();
