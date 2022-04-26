@@ -54,7 +54,7 @@ function Customize() {
         }
         axios({
             method: "PUT",
-            baseURL: "http://localhost:5000/user/cart/update",
+            baseURL: "https://supple-soap-backend-api.herokuapp.com/user/cart/update",
             data: {
                 ...userData.cart,
                 customizedProducts: cartData,

@@ -28,7 +28,7 @@ const getDate = (iso) => {
 const OrderItem = (props) => {
     const updateOrderStatus = (status, orderId, type) => {
         axios({
-            baseURL: "http://localhost:5000/admin/orders/update",
+            baseURL: "https://supple-soap-backend-api.herokuapp.com/admin/orders/update",
             method: "POST",
             data: {
                 status: status,
@@ -138,7 +138,7 @@ function OrdersAdmin() {
 
     const fetchOrdersData = () => {
         axios({
-            baseURL: "http://localhost:5000/admin/orders",
+            baseURL: "https://supple-soap-backend-api.herokuapp.com/admin/orders",
             method: "GET",
             data: null,
             headers: {

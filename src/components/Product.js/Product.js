@@ -37,7 +37,7 @@ function Product(props) {
         }
         axios({
             method: "PUT",
-            baseURL: "http://localhost:5000/user/cart/update",
+            baseURL: "https://supple-soap-backend-api.herokuapp.com/user/cart/update",
             data: {
                 ...userData.cart,
                 regularProducts: cartData,

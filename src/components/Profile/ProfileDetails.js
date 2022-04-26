@@ -10,7 +10,7 @@ function ProfileDetails(props) {
     const userData = useSelector((state) => state.userData);
     const updateUserProfile = async () => {
         axios({
-            url: "http://localhost:5000/user/profile/update",
+            url: "https://supple-soap-backend-api.herokuapp.com/user/profile/update",
             method: "POST",
             data: {
                 name: nameRef.current.value,

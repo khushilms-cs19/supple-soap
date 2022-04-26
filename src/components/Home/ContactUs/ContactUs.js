@@ -13,7 +13,7 @@ const ContactUs = React.forwardRef((props, ref) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         axios({
-            baseURL: "http://localhost:5000/contactus",
+            baseURL: "https://supple-soap-backend-api.herokuapp.com/contactus",
             method: "POST",
             data: {
                 name: nameRef.current.value,

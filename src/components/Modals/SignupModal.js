@@ -39,7 +39,7 @@ function SignupModal(props) {
         if (nameRef.current.value && emailRef.current.value && addressRef.current.value && phonenoRef.current.value && passwordRef.current.value) {
 
             axios({
-                baseURL: "http://localhost:5000/user/signup",
+                baseURL: "https://supple-soap-backend-api.herokuapp.com/user/signup",
                 method: "POST",
                 data: signupData,
             }).then((data) => {

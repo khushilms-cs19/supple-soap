@@ -31,7 +31,7 @@ function CartDetails(props) {
         return await new Promise((resolve, reject) => {
             axios({
                 method: "post",
-                baseURL: "http://localhost:5000/order/razorpay-create-order",
+                baseURL: "https://supple-soap-backend-api.herokuapp.com/order/razorpay-create-order",
                 data: userData.cart,
                 headers: {
                     "Authentication": localStorage.getItem("user"),
@@ -80,7 +80,7 @@ function CartDetails(props) {
     const updateCartInDB = async (cartData) => {
         axios({
             method: "PUT",
-            baseURL: "http://localhost:5000/user/cart/update",
+            baseURL: "https://supple-soap-backend-api.herokuapp.com/user/cart/update",
             data: cartData,
             headers: {
                 "Authentication": localStorage.getItem("user"),
@@ -126,7 +126,7 @@ function CartDetails(props) {
         if (cartData.regularProducts.length !== 0 || cartData.customizedProducts.length !== 0) {
             axios({
                 method: "POST",
-                baseURL: "http://localhost:5000/order/regular",
+                baseURL: "https://supple-soap-backend-api.herokuapp.com/order/regular",
                 data: {
                     ...cartData,
                     razorpay: {

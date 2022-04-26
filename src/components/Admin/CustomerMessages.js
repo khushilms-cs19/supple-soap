@@ -42,7 +42,7 @@ const Message = (props) => {
 function CustomerMessage(props) {
     const updateMessageStatus = (status, messageId) => {
         axios({
-            baseURL: "http://localhost:5000/admin/customer-messages/update",
+            baseURL: "https://supple-soap-backend-api.herokuapp.com/admin/customer-messages/update",
             method: "POST",
             data: {
                 status: status,
@@ -104,7 +104,7 @@ const CustomerMessages = () => {
     // const [filterOption, setFilterOption] = useState("all");
     const fetchCustomerMessages = () => {
         axios({
-            baseURL: "http://localhost:5000/admin/customer-messages",
+            baseURL: "https://supple-soap-backend-api.herokuapp.com/admin/customer-messages",
             method: "GET",
             data: null,
             headers: {
